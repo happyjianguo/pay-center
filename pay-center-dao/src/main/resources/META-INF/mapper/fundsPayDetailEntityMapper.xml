@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dream.pay.center.dao.FundsPayDetailDao">
+    <resultMap id="BaseResultMap" type="com.dream.pay.center.model.FundsPayDetailEntity">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="pay_detail_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_items_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="biz_trade_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_tool" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_tool_type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="biz_sub_action" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="biz_channel" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="currency" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="pay_amount" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="real_amount" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="pay_status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="channel_return_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_return_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_finish_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="out_error_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_error_msg" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="user_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="merchant_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="third_merchant_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_note" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_biz_context" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, pay_detail_no, pay_trade_items_no, pay_trade_no,biz_trade_no,pay_tool, pay_tool_type, biz_sub_action, biz_channel,
+        currency, pay_amount, real_amount, pay_status,
+        channel_return_no, out_return_no, out_finish_time, out_error_code, out_error_msg,
+        user_no, merchant_no, third_merchant_no, pay_tag, pay_note, out_biz_context, create_time,update_time
+    </sql>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from funds_pay_detail
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.dream.pay.center.model.FundsPayDetailEntity">
+        insert into funds_pay_detail (pay_detail_no, pay_trade_items_no,pay_trade_no,biz_trade_no,
+        pay_tool, pay_tool_type, biz_sub_action,
+        biz_channel, currency, pay_amount,
+        real_amount, pay_status, channel_return_no, out_return_no,
+        out_finish_time, out_error_code, out_error_msg,
+        user_no, merchant_no, third_merchant_no,
+        pay_tag, pay_note, out_biz_context,
+        create_time, update_time)
+        values ( #{payDetailNo,jdbcType=VARCHAR}, #{payTradeItemsNo,jdbcType=VARCHAR},
+        #{payTradeNo,jdbcType=VARCHAR},#{bizTradeNo,jdbcType=VARCHAR},
+        #{payTool,jdbcType=VARCHAR}, #{payToolType,jdbcType=INTEGER}, #{bizSubAction,jdbcType=INTEGER},
+        #{bizChannel,jdbcType=INTEGER}, #{currency,jdbcType=INTEGER}, #{payAmount,jdbcType=BIGINT},
+        #{realAmount,jdbcType=BIGINT}, #{payStatus,jdbcType=INTEGER}, #{channelReturnNo,jdbcType=VARCHAR}, #{outReturnNo,jdbcType=VARCHAR},
+        #{outFinishTime,jdbcType=TIMESTAMP}, #{outErrorCode,jdbcType=VARCHAR}, #{outErrorMsg,jdbcType=VARCHAR},
+        #{userNo,jdbcType=VARCHAR}, #{merchantNo,jdbcType=VARCHAR}, #{thirdMerchantNo,jdbcType=VARCHAR},
+        #{payTag,jdbcType=VARCHAR}, #{payNote,jdbcType=VARCHAR}, #{outBizContext,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.dream.pay.center.model.FundsPayDetailEntity">
+        insert into funds_pay_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payDetailNo != null">
+                pay_detail_no,
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no,
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no,
+            </if>
+            <if test="bizTradeNo != null">
+                biz_trade_no,
+            </if>
+            <if test="payTool != null">
+                pay_tool,
+            </if>
+            <if test="payToolType != null">
+                pay_tool_type,
+            </if>
+            <if test="bizSubAction != null">
+                biz_sub_action,
+            </if>
+            <if test="bizChannel != null">
+                biz_channel,
+            </if>
+            <if test="currency != null">
+                currency,
+            </if>
+            <if test="payAmount != null">
+                pay_amount,
+            </if>
+            <if test="realAmount != null">
+                real_amount,
+            </if>
+            <if test="payStatus != null">
+                pay_status,
+            </if>
+            <if test="channelReturnNo != null">
+                channel_return_no,
+            </if>
+            <if test="outReturnNo != null">
+                out_return_no,
+            </if>
+            <if test="outFinishTime != null">
+                out_finish_time,
+            </if>
+            <if test="outErrorCode != null">
+                out_error_code,
+            </if>
+            <if test="outErrorMsg != null">
+                out_error_msg,
+            </if>
+            <if test="userNo != null">
+                user_no,
+            </if>
+            <if test="merchantNo != null">
+                merchant_no,
+            </if>
+            <if test="thirdMerchantNo != null">
+                third_merchant_no,
+            </if>
+            <if test="payTag != null">
+                pay_tag,
+            </if>
+            <if test="payNote != null">
+                pay_note,
+            </if>
+            <if test="outBizContext != null">
+                out_biz_context,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payDetailNo != null">
+                #{payDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bizTradeNo != null">
+                #{bizTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTool != null">
+                #{payTool,jdbcType=VARCHAR},
+            </if>
+            <if test="payToolType != null">
+                #{payToolType,jdbcType=INTEGER},
+            </if>
+            <if test="bizSubAction != null">
+                #{bizSubAction,jdbcType=INTEGER},
+            </if>
+            <if test="bizChannel != null">
+                #{bizChannel,jdbcType=INTEGER},
+            </if>
+            <if test="currency != null">
+                #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="payAmount != null">
+                #{payAmount,jdbcType=BIGINT},
+            </if>
+            <if test="realAmount != null">
+                #{realAmount,jdbcType=BIGINT},
+            </if>
+            <if test="payStatus != null">
+                #{payStatus,jdbcType=INTEGER},
+            </if>
+            <if test="channelReturnNo != null">
+                #{channelReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outReturnNo != null">
+                #{outReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outFinishTime != null">
+                #{outFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outErrorCode != null">
+                #{outErrorCode,jdbcType=VARCHAR},
+            </if>
+            <if test="outErrorMsg != null">
+                #{outErrorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="userNo != null">
+                #{userNo,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantNo != null">
+                #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdMerchantNo != null">
+                #{thirdMerchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTag != null">
+                #{payTag,jdbcType=VARCHAR},
+            </if>
+            <if test="payNote != null">
+                #{payNote,jdbcType=VARCHAR},
+            </if>
+            <if test="outBizContext != null">
+                #{outBizContext,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dream.pay.center.model.FundsPayDetailEntity">
+        update funds_pay_detail
+        <set>
+            <if test="payDetailNo != null">
+                pay_detail_no = #{payDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bizTradeNo != null">
+                biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTool != null">
+                pay_tool = #{payTool,jdbcType=VARCHAR},
+            </if>
+            <if test="payToolType != null">
+                pay_tool_type = #{payToolType,jdbcType=INTEGER},
+            </if>
+            <if test="bizSubAction != null">
+                biz_sub_action = #{bizSubAction,jdbcType=INTEGER},
+            </if>
+            <if test="bizChannel != null">
+                biz_channel = #{bizChannel,jdbcType=INTEGER},
+            </if>
+            <if test="currency != null">
+                currency = #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="payAmount != null">
+                pay_amount = #{payAmount,jdbcType=BIGINT},
+            </if>
+            <if test="realAmount != null">
+                real_amount = #{realAmount,jdbcType=BIGINT},
+            </if>
+            <if test="payStatus != null">
+                pay_status = #{payStatus,jdbcType=INTEGER},
+            </if>
+            <if test="channelReturnNo != null">
+                channel_return_no = #{channelReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outReturnNo != null">
+                out_return_no = #{outReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outFinishTime != null">
+                out_finish_time = #{outFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outErrorCode != null">
+                out_error_code = #{outErrorCode,jdbcType=VARCHAR},
+            </if>
+            <if test="outErrorMsg != null">
+                out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="userNo != null">
+                user_no = #{userNo,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantNo != null">
+                merchant_no = #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdMerchantNo != null">
+                third_merchant_no = #{thirdMerchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTag != null">
+                pay_tag = #{payTag,jdbcType=VARCHAR},
+            </if>
+            <if test="payNote != null">
+                pay_note = #{payNote,jdbcType=VARCHAR},
+            </if>
+            <if test="outBizContext != null">
+                out_biz_context = #{outBizContext,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dream.pay.center.model.FundsPayDetailEntity">
+        update funds_pay_detail
+        set pay_detail_no = #{payDetailNo,jdbcType=VARCHAR},
+        pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+        biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+        pay_tool = #{payTool,jdbcType=VARCHAR},
+        pay_tool_type = #{payToolType,jdbcType=INTEGER},
+        biz_sub_action = #{bizSubAction,jdbcType=INTEGER},
+        biz_channel = #{bizChannel,jdbcType=INTEGER},
+        currency = #{currency,jdbcType=INTEGER},
+        pay_amount = #{payAmount,jdbcType=BIGINT},
+        real_amount = #{realAmount,jdbcType=BIGINT},
+        pay_status = #{payStatus,jdbcType=INTEGER},
+        channel_return_no = #{channelReturnNo,jdbcType=VARCHAR},
+        out_return_no = #{outReturnNo,jdbcType=VARCHAR},
+        out_finish_time = #{outFinishTime,jdbcType=TIMESTAMP},
+        out_error_code = #{outErrorCode,jdbcType=VARCHAR},
+        out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
+        user_no = #{userNo,jdbcType=VARCHAR},
+        merchant_no = #{merchantNo,jdbcType=VARCHAR},
+        third_merchant_no = #{thirdMerchantNo,jdbcType=VARCHAR},
+        pay_tag = #{payTag,jdbcType=VARCHAR},
+        pay_note = #{payNote,jdbcType=VARCHAR},
+        out_biz_context = #{outBizContext,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dream.pay.center.model.FundsPayDetailEntity">
+        update funds_pay_detail
+        set pay_detail_no = #{payDetailNo,jdbcType=VARCHAR},
+        pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+        biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+        pay_tool = #{payTool,jdbcType=VARCHAR},
+        pay_tool_type = #{payToolType,jdbcType=INTEGER},
+        biz_sub_action = #{bizSubAction,jdbcType=INTEGER},
+        biz_channel = #{bizChannel,jdbcType=INTEGER},
+        currency = #{currency,jdbcType=INTEGER},
+        pay_amount = #{payAmount,jdbcType=BIGINT},
+        real_amount = #{realAmount,jdbcType=BIGINT},
+        pay_status = #{payStatus,jdbcType=INTEGER},
+        channel_return_no = #{channelReturnNo,jdbcType=VARCHAR},
+        out_return_no = #{outReturnNo,jdbcType=VARCHAR},
+        out_finish_time = #{outFinishTime,jdbcType=TIMESTAMP},
+        out_error_code = #{outErrorCode,jdbcType=VARCHAR},
+        out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
+        user_no = #{userNo,jdbcType=VARCHAR},
+        merchant_no = #{merchantNo,jdbcType=VARCHAR},
+        third_merchant_no = #{thirdMerchantNo,jdbcType=VARCHAR},
+        pay_tag = #{payTag,jdbcType=VARCHAR},
+        pay_note = #{payNote,jdbcType=VARCHAR},
+        out_biz_context = #{outBizContext,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="loadByDetailNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_pay_detail
+        where pay_detail_no = #{payDetailNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="loadByItemNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_pay_detail
+        where pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="loadForRefund" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_pay_detail
+        where pay_trade_no = #{payTradeNo,jdbcType=VARCHAR}
+        and pay_status = 2
+        and pay_tool_type !=16
+        order by pay_tool_type desc
+    </select>
+
+
+
+</mapper>

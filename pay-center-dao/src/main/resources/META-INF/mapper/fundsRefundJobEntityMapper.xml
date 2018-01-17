@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dream.pay.center.dao.FundsRefundJobDao">
+    <resultMap id="BaseResultMap" type="com.dream.pay.center.model.FundsRefundJobEntity">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="refund_detail_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_items_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="job_type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="job_type_desc" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="job_status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="job_run_count" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="env" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, refund_detail_no, pay_trade_items_no, pay_trade_no, job_type, job_type_desc,
+        job_status, job_run_count, env, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_refund_job
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from funds_refund_job
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.dream.pay.center.model.FundsRefundJobEntity">
+        insert into funds_refund_job (refund_detail_no, pay_trade_items_no,
+        pay_trade_no, job_type, job_type_desc,
+        job_status, job_run_count, env,
+        create_time, update_time)
+        values (#{refundDetailNo,jdbcType=VARCHAR}, #{payTradeItemsNo,jdbcType=VARCHAR},
+        #{payTradeNo,jdbcType=VARCHAR}, #{jobType,jdbcType=INTEGER}, #{jobTypeDesc,jdbcType=VARCHAR},
+        #{jobStatus,jdbcType=INTEGER}, #{jobRunCount,jdbcType=INTEGER}, #{env,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.dream.pay.center.model.FundsRefundJobEntity">
+        insert into funds_refund_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="refundDetailNo != null">
+                refund_detail_no,
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no,
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no,
+            </if>
+            <if test="jobType != null">
+                job_type,
+            </if>
+            <if test="jobTypeDesc != null">
+                job_type_desc,
+            </if>
+            <if test="jobStatus != null">
+                job_status,
+            </if>
+            <if test="jobRunCount != null">
+                job_run_count,
+            </if>
+            <if test="env != null">
+                env,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="refundDetailNo != null">
+                #{refundDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="jobType != null">
+                #{jobType,jdbcType=INTEGER},
+            </if>
+            <if test="jobTypeDesc != null">
+                #{jobTypeDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="jobStatus != null">
+                #{jobStatus,jdbcType=INTEGER},
+            </if>
+            <if test="jobRunCount != null">
+                #{jobRunCount,jdbcType=INTEGER},
+            </if>
+            <if test="env != null">
+                #{env,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dream.pay.center.model.FundsRefundJobEntity">
+        update funds_refund_job
+        <set>
+            <if test="refundDetailNo != null">
+                refund_detail_no = #{refundDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="jobType != null">
+                job_type = #{jobType,jdbcType=INTEGER},
+            </if>
+            <if test="jobTypeDesc != null">
+                job_type_desc = #{jobTypeDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="jobStatus != null">
+                job_status = #{jobStatus,jdbcType=INTEGER},
+            </if>
+            <if test="jobRunCount != null">
+                job_run_count = #{jobRunCount,jdbcType=INTEGER},
+            </if>
+            <if test="env != null">
+                env = #{env,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dream.pay.center.model.FundsRefundJobEntity">
+        update funds_refund_job
+        set refund_detail_no = #{refundDetailNo,jdbcType=VARCHAR},
+        pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+        job_type = #{jobType,jdbcType=INTEGER},
+        job_type_desc = #{jobTypeDesc,jdbcType=VARCHAR},
+        job_status = #{jobStatus,jdbcType=INTEGER},
+        job_run_count = #{jobRunCount,jdbcType=INTEGER},
+        env = #{env,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateTypeById">
+        update funds_refund_job
+        set
+        job_type = #{jobType,jdbcType=INTEGER},
+        job_type_desc = #{jobTypeDesc,jdbcType=VARCHAR},
+        update_time = now()
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="loadByPayItemsNo" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_refund_job
+        where pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

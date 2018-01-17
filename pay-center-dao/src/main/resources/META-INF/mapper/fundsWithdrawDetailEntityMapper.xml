@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dream.pay.center.dao.FundsWithdrawDetailDao">
+    <resultMap id="BaseResultMap" type="com.dream.pay.center.model.FundsWithdrawDetailEntity">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="withdraw_detail_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_items_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="biz_trade_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="currency" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="withdraw_amount" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="withdraw_status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="channel_return_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_return_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_finish_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="out_error_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_error_msg" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="user_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="merchant_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="partner_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="cust_account_type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="inst_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_branch_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_province" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_city" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_account_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_account_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_account_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="inst_card_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="withdraw_tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="withdraw_note" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="out_biz_context" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, withdraw_detail_no, pay_trade_items_no, pay_trade_no, biz_trade_no,currency, withdraw_amount,
+        withdraw_status,channel_return_no, out_return_no, out_finish_time,
+        out_error_code, out_error_msg, user_no, merchant_no, partner_id,cust_account_type, inst_id,
+        inst_name, inst_branch_name, inst_province, inst_city, inst_account_no, inst_account_name,
+        inst_account_type, inst_card_type, withdraw_tag, withdraw_note, out_biz_context,
+        create_time, update_time
+    </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from funds_withdraw_detail
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.dream.pay.center.model.FundsWithdrawDetailEntity">
+        insert into funds_withdraw_detail (withdraw_detail_no, pay_trade_items_no,pay_trade_no,biz_trade_no,
+        currency, withdraw_amount, withdraw_status,channel_return_no,
+        out_return_no, out_finish_time, out_error_code,
+        out_error_msg, user_no, merchant_no,partner_id,
+        cust_account_type, inst_id, inst_name,
+        inst_branch_name, inst_province, inst_city,
+        inst_account_no, inst_account_name, inst_account_type,
+        inst_card_type, withdraw_tag, withdraw_note,
+        out_biz_context, create_time, update_time)
+        values (#{withdrawDetailNo,jdbcType=VARCHAR}, #{payTradeItemsNo,jdbcType=VARCHAR},
+        #{payTradeNo,jdbcType=VARCHAR}, #{bizTradeNo,jdbcType=VARCHAR},#{currency,jdbcType=INTEGER},
+        #{withdrawAmount,jdbcType=BIGINT},
+        #{withdrawStatus,jdbcType=INTEGER}, #{channelReturnNo,jdbcType=VARCHAR},
+        #{outReturnNo,jdbcType=VARCHAR}, #{outFinishTime,jdbcType=TIMESTAMP}, #{outErrorCode,jdbcType=VARCHAR},
+        #{outErrorMsg,jdbcType=VARCHAR}, #{userNo,jdbcType=VARCHAR}, #{merchantNo,jdbcType=VARCHAR},#{partnerId,jdbcType=VARCHAR},
+        #{custAccountType,jdbcType=INTEGER}, #{instId,jdbcType=VARCHAR}, #{instName,jdbcType=VARCHAR},
+        #{instBranchName,jdbcType=VARCHAR}, #{instProvince,jdbcType=VARCHAR}, #{instCity,jdbcType=VARCHAR},
+        #{instAccountNo,jdbcType=VARCHAR}, #{instAccountName,jdbcType=VARCHAR}, #{instAccountType,jdbcType=VARCHAR},
+        #{instCardType,jdbcType=VARCHAR}, #{withdrawTag,jdbcType=VARCHAR}, #{withdrawNote,jdbcType=VARCHAR},
+        #{outBizContext,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.dream.pay.center.model.FundsWithdrawDetailEntity">
+        insert into funds_withdraw_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="withdrawDetailNo != null">
+                withdraw_detail_no,
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no,
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no,
+            </if>
+            <if test="bizTradeNo != null">
+                biz_trade_no,
+            </if>
+            <if test="currency != null">
+                currency,
+            </if>
+            <if test="withdrawAmount != null">
+                withdraw_amount,
+            </if>
+            <if test="withdrawStatus != null">
+                withdraw_status,
+            </if>
+            <if test="channelReturnNo != null">
+                channel_return_no,
+            </if>
+            <if test="outReturnNo != null">
+                out_return_no,
+            </if>
+            <if test="outFinishTime != null">
+                out_finish_time,
+            </if>
+            <if test="outErrorCode != null">
+                out_error_code,
+            </if>
+            <if test="outErrorMsg != null">
+                out_error_msg,
+            </if>
+            <if test="userNo != null">
+                user_no,
+            </if>
+            <if test="merchantNo != null">
+                merchant_no,
+            </if>
+            <if test="partnerId != null">
+                partner_id,
+            </if>
+            <if test="custAccountType != null">
+                cust_account_type,
+            </if>
+            <if test="instId != null">
+                inst_id,
+            </if>
+            <if test="instName != null">
+                inst_name,
+            </if>
+            <if test="instBranchName != null">
+                inst_branch_name,
+            </if>
+            <if test="instProvince != null">
+                inst_province,
+            </if>
+            <if test="instCity != null">
+                inst_city,
+            </if>
+            <if test="instAccountNo != null">
+                inst_account_no,
+            </if>
+            <if test="instAccountName != null">
+                inst_account_name,
+            </if>
+            <if test="instAccountType != null">
+                inst_account_type,
+            </if>
+            <if test="instCardType != null">
+                inst_card_type,
+            </if>
+            <if test="withdrawTag != null">
+                withdraw_tag,
+            </if>
+            <if test="withdrawNote != null">
+                withdraw_note,
+            </if>
+            <if test="outBizContext != null">
+                out_biz_context,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="withdrawDetailNo != null">
+                #{withdrawDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bizTradeNo != null">
+                #{bizTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null">
+                #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="withdrawAmount != null">
+                #{withdrawAmount,jdbcType=BIGINT},
+            </if>
+            <if test="withdrawStatus != null">
+                #{withdrawStatus,jdbcType=INTEGER},
+            </if>
+            <if test="channelReturnNo != null">
+                #{channelReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outReturnNo != null">
+                #{outReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outFinishTime != null">
+                #{outFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outErrorCode != null">
+                #{outErrorCode,jdbcType=VARCHAR},
+            </if>
+            <if test="outErrorMsg != null">
+                #{outErrorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="userNo != null">
+                #{userNo,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantNo != null">
+                #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="partnerId != null">
+                #{partnerId,jdbcType=VARCHAR},
+            </if>
+            <if test="custAccountType != null">
+                #{custAccountType,jdbcType=INTEGER},
+            </if>
+            <if test="instId != null">
+                #{instId,jdbcType=VARCHAR},
+            </if>
+            <if test="instName != null">
+                #{instName,jdbcType=VARCHAR},
+            </if>
+            <if test="instBranchName != null">
+                #{instBranchName,jdbcType=VARCHAR},
+            </if>
+            <if test="instProvince != null">
+                #{instProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="instCity != null">
+                #{instCity,jdbcType=VARCHAR},
+            </if>
+            <if test="instAccountNo != null">
+                #{instAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="instAccountName != null">
+                #{instAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="instAccountType != null">
+                #{instAccountType,jdbcType=VARCHAR},
+            </if>
+            <if test="instCardType != null">
+                #{instCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawTag != null">
+                #{withdrawTag,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawNote != null">
+                #{withdrawNote,jdbcType=VARCHAR},
+            </if>
+            <if test="outBizContext != null">
+                #{outBizContext,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dream.pay.center.model.FundsWithdrawDetailEntity">
+        update funds_withdraw_detail
+        <set>
+            <if test="withdrawDetailNo != null">
+                withdraw_detail_no = #{withdrawDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bizTradeNo != null">
+                biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null">
+                currency = #{currency,jdbcType=INTEGER},
+            </if>
+            <if test="withdrawAmount != null">
+                withdraw_amount = #{withdrawAmount,jdbcType=BIGINT},
+            </if>
+            <if test="withdrawStatus != null">
+                withdraw_status = #{withdrawStatus,jdbcType=INTEGER},
+            </if>
+            <if test="channelReturnNo != null">
+                channel_return_no = #{channelReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outReturnNo != null">
+                out_return_no = #{outReturnNo,jdbcType=VARCHAR},
+            </if>
+            <if test="outFinishTime != null">
+                out_finish_time = #{outFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outErrorCode != null">
+                out_error_code = #{outErrorCode,jdbcType=VARCHAR},
+            </if>
+            <if test="outErrorMsg != null">
+                out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="userNo != null">
+                user_no = #{userNo,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantNo != null">
+                merchant_no = #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="partnerId != null">
+                partner_id = #{partnerId,jdbcType=VARCHAR},
+            </if>
+            <if test="custAccountType != null">
+                cust_account_type = #{custAccountType,jdbcType=INTEGER},
+            </if>
+            <if test="instId != null">
+                inst_id = #{instId,jdbcType=VARCHAR},
+            </if>
+            <if test="instName != null">
+                inst_name = #{instName,jdbcType=VARCHAR},
+            </if>
+            <if test="instBranchName != null">
+                inst_branch_name = #{instBranchName,jdbcType=VARCHAR},
+            </if>
+            <if test="instProvince != null">
+                inst_province = #{instProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="instCity != null">
+                inst_city = #{instCity,jdbcType=VARCHAR},
+            </if>
+            <if test="instAccountNo != null">
+                inst_account_no = #{instAccountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="instAccountName != null">
+                inst_account_name = #{instAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="instAccountType != null">
+                inst_account_type = #{instAccountType,jdbcType=VARCHAR},
+            </if>
+            <if test="instCardType != null">
+                inst_card_type = #{instCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawTag != null">
+                withdraw_tag = #{withdrawTag,jdbcType=VARCHAR},
+            </if>
+            <if test="withdrawNote != null">
+                withdraw_note = #{withdrawNote,jdbcType=VARCHAR},
+            </if>
+            <if test="outBizContext != null">
+                out_biz_context = #{outBizContext,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dream.pay.center.model.FundsWithdrawDetailEntity">
+        update funds_withdraw_detail
+        set withdraw_detail_no = #{withdrawDetailNo,jdbcType=VARCHAR},
+        pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+        biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+        currency = #{currency,jdbcType=INTEGER},
+        withdraw_amount = #{withdrawAmount,jdbcType=BIGINT},
+        withdraw_status = #{withdrawStatus,jdbcType=INTEGER},
+        channel_return_no = #{channelReturnNo,jdbcType=VARCHAR},
+        out_return_no = #{outReturnNo,jdbcType=VARCHAR},
+        out_finish_time = #{outFinishTime,jdbcType=TIMESTAMP},
+        out_error_code = #{outErrorCode,jdbcType=VARCHAR},
+        out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
+        user_no = #{userNo,jdbcType=VARCHAR},
+        merchant_no = #{merchantNo,jdbcType=VARCHAR},
+        partner_id = #{partnerId,jdbcType=VARCHAR},
+        cust_account_type = #{custAccountType,jdbcType=INTEGER},
+        inst_id = #{instId,jdbcType=VARCHAR},
+        inst_name = #{instName,jdbcType=VARCHAR},
+        inst_branch_name = #{instBranchName,jdbcType=VARCHAR},
+        inst_province = #{instProvince,jdbcType=VARCHAR},
+        inst_city = #{instCity,jdbcType=VARCHAR},
+        inst_account_no = #{instAccountNo,jdbcType=VARCHAR},
+        inst_account_name = #{instAccountName,jdbcType=VARCHAR},
+        inst_account_type = #{instAccountType,jdbcType=VARCHAR},
+        inst_card_type = #{instCardType,jdbcType=VARCHAR},
+        withdraw_tag = #{withdrawTag,jdbcType=VARCHAR},
+        withdraw_note = #{withdrawNote,jdbcType=VARCHAR},
+        out_biz_context = #{outBizContext,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dream.pay.center.model.FundsWithdrawDetailEntity">
+        update funds_withdraw_detail
+        set withdraw_detail_no = #{withdrawDetailNo,jdbcType=VARCHAR},
+        pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+        biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+        currency = #{currency,jdbcType=INTEGER},
+        withdraw_amount = #{withdrawAmount,jdbcType=BIGINT},
+        withdraw_status = #{withdrawStatus,jdbcType=INTEGER},
+        channel_return_no = #{channelReturnNo,jdbcType=VARCHAR},
+        out_return_no = #{outReturnNo,jdbcType=VARCHAR},
+        out_finish_time = #{outFinishTime,jdbcType=TIMESTAMP},
+        out_error_code = #{outErrorCode,jdbcType=VARCHAR},
+        out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
+        user_no = #{userNo,jdbcType=VARCHAR},
+        merchant_no = #{merchantNo,jdbcType=VARCHAR},
+        partner_id = #{partnerId,jdbcType=VARCHAR},
+        cust_account_type = #{custAccountType,jdbcType=INTEGER},
+        inst_id = #{instId,jdbcType=VARCHAR},
+        inst_name = #{instName,jdbcType=VARCHAR},
+        inst_branch_name = #{instBranchName,jdbcType=VARCHAR},
+        inst_province = #{instProvince,jdbcType=VARCHAR},
+        inst_city = #{instCity,jdbcType=VARCHAR},
+        inst_account_no = #{instAccountNo,jdbcType=VARCHAR},
+        inst_account_name = #{instAccountName,jdbcType=VARCHAR},
+        inst_account_type = #{instAccountType,jdbcType=VARCHAR},
+        inst_card_type = #{instCardType,jdbcType=VARCHAR},
+        withdraw_tag = #{withdrawTag,jdbcType=VARCHAR},
+        withdraw_note = #{withdrawNote,jdbcType=VARCHAR},
+        out_biz_context = #{outBizContext,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="loadBySelective" resultMap="BaseResultMap"
+            parameterType="com.dream.pay.center.model.FundsWithdrawDetailEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_withdraw_detail
+        where 1=1
+        <if test="id != null">
+            and id = #{id,jdbcType=BIGINT},
+        </if>
+        <if test="withdrawDetailNo != null">
+            and withdraw_detail_no = #{withdrawDetailNo,jdbcType=VARCHAR},
+        </if>
+        <if test="payTradeItemsNo != null">
+            and pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+        </if>
+        <if test="payTradeNo != null">
+            and pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+        </if>
+        <if test="bizTradeNo != null">
+            and biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+        </if>
+        <if test="currency != null">
+            and currency = #{currency,jdbcType=INTEGER},
+        </if>
+        <if test="withdrawAmount != null">
+            and withdraw_amount = #{withdrawAmount,jdbcType=BIGINT},
+        </if>
+        <if test="withdrawStatus != null">
+            and withdraw_status = #{withdrawStatus,jdbcType=INTEGER},
+        </if>
+        <if test="channelReturnNo != null">
+            and channel_return_no = #{channelReturnNo,jdbcType=VARCHAR},
+        </if>
+        <if test="outReturnNo != null">
+            and out_return_no = #{outReturnNo,jdbcType=VARCHAR},
+        </if>
+        <if test="outFinishTime != null">
+            and out_finish_time = #{outFinishTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="outErrorCode != null">
+            and out_error_code = #{outErrorCode,jdbcType=VARCHAR},
+        </if>
+        <if test="outErrorMsg != null">
+            and out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
+        </if>
+        <if test="userNo != null">
+            and user_no = #{userNo,jdbcType=VARCHAR},
+        </if>
+        <if test="merchantNo != null">
+            and merchant_no = #{merchantNo,jdbcType=VARCHAR},
+        </if>
+        <if test="partnerId != null">
+            and partner_id = #{partnerId,jdbcType=VARCHAR},
+        </if>
+        <if test="custAccountType != null">
+            and cust_account_type = #{custAccountType,jdbcType=INTEGER},
+        </if>
+        <if test="instId != null">
+            and inst_id = #{instId,jdbcType=VARCHAR},
+        </if>
+        <if test="instName != null">
+            and inst_name = #{instName,jdbcType=VARCHAR},
+        </if>
+        <if test="instBranchName != null">
+            and inst_branch_name = #{instBranchName,jdbcType=VARCHAR},
+        </if>
+        <if test="instProvince != null">
+            inst_province = #{instProvince,jdbcType=VARCHAR},
+        </if>
+        <if test="instCity != null">
+            and inst_city = #{instCity,jdbcType=VARCHAR},
+        </if>
+        <if test="instAccountNo != null">
+            and inst_account_no = #{instAccountNo,jdbcType=VARCHAR},
+        </if>
+        <if test="instAccountName != null">
+            and inst_account_name = #{instAccountName,jdbcType=VARCHAR},
+        </if>
+        <if test="instAccountType != null">
+            and inst_account_type = #{instAccountType,jdbcType=VARCHAR},
+        </if>
+        <if test="instCardType != null">
+            and inst_card_type = #{instCardType,jdbcType=VARCHAR},
+        </if>
+        <if test="withdrawTag != null">
+            and withdraw_tag = #{withdrawTag,jdbcType=VARCHAR},
+        </if>
+        <if test="withdrawNote != null">
+            and withdraw_note = #{withdrawNote,jdbcType=VARCHAR},
+        </if>
+        <if test="outBizContext != null">
+            and out_biz_context = #{outBizContext,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateTime != null">
+            and update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+    </select>
+</mapper>

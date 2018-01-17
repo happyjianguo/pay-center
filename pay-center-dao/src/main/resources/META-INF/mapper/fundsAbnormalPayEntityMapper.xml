@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dream.pay.center.dao.FundsAbnormalPayDao">
+    <resultMap id="BaseResultMap" type="com.dream.pay.center.model.FundsAbnormalPayEntity">
+        <constructor>
+            <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="biz_trade_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_trade_items_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="pay_detail_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, biz_trade_no, pay_trade_no, pay_trade_items_no, pay_detail_no, type, status,
+        create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_abnormal_pay
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from funds_abnormal_pay
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.dream.pay.center.model.FundsAbnormalPayEntity">
+        insert into funds_abnormal_pay (id, biz_trade_no, pay_trade_no,
+        pay_trade_items_no, pay_detail_no, type,
+        status, create_time, update_time
+        )
+        values (#{id,jdbcType=BIGINT}, #{bizTradeNo,jdbcType=VARCHAR}, #{payTradeNo,jdbcType=VARCHAR},
+        #{payTradeItemsNo,jdbcType=VARCHAR}, #{payDetailNo,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.dream.pay.center.model.FundsAbnormalPayEntity">
+        insert into funds_abnormal_pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="bizTradeNo != null">
+                biz_trade_no,
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no,
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no,
+            </if>
+            <if test="payDetailNo != null">
+                pay_detail_no,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="bizTradeNo != null">
+                #{bizTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payDetailNo != null">
+                #{payDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dream.pay.center.model.FundsAbnormalPayEntity">
+        update funds_abnormal_pay
+        <set>
+            <if test="bizTradeNo != null">
+                biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeNo != null">
+                pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payTradeItemsNo != null">
+                pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payDetailNo != null">
+                pay_detail_no = #{payDetailNo,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dream.pay.center.model.FundsAbnormalPayEntity">
+        update funds_abnormal_pay
+        set biz_trade_no = #{bizTradeNo,jdbcType=VARCHAR},
+        pay_trade_no = #{payTradeNo,jdbcType=VARCHAR},
+        pay_trade_items_no = #{payTradeItemsNo,jdbcType=VARCHAR},
+        pay_detail_no = #{payDetailNo,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="loadForRecovery" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from funds_abnormal_pay
+        where type = #{type,jdbcType=BIGINT}
+        create_time = #{beginTime,jdbcType=TIMESTAMP},
+        update_time = #{endTime,jdbcType=TIMESTAMP}
+    </select>
+
+</mapper>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.dream.pay</groupId>
+    <artifactId>pay-center</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>pay-center-access</module>
+        <module>pay-center-access-impl</module>
+        <module>pay-center-dao</module>
+        <module>pay-center-deploy</module>
+        <module>pay-center-service</module>
+        <module>pay-center-pay</module>
+        <module>pay-center-refund</module>
+        <module>pay-center-recharge</module>
+        <module>pay-center-withdraw</module>
+        <module>pay-center-transfer</module>
+        <module>pay-center-order</module>
+        <module>pay-center-common</module>
+        <module>pay-center-out-mock</module>
+    </modules>
+    <packaging>pom</packaging>
+    <properties>
+        <lombok.version>1.16.6</lombok.version>
+        <hibernate-validator.version>4.3.2.Final</hibernate-validator.version>
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+        <pay-common.version>1.0-SNAPSHOT</pay-common.version>
+        <validation-api.version>1.0.0.GA</validation-api.version>
+
+        <bootstrap.version>3.1.2.4-RELEASE</bootstrap.version>
+        <framework-ibatis.version>1.0.2-RELEASE</framework-ibatis.version>
+        <redisclient.version>1.0.3-SNAPSHOT</redisclient.version>
+        <dts.version>2.0.8-service-chain-SNAPSHOT</dts.version>
+        <nsq-client.version>2.4.1.1-RELEASE</nsq-client.version>
+
+        <mybatis.version>3.2.8</mybatis.version>
+        <mybatis-spring.version>1.2.2</mybatis-spring.version>
+        <druid.version>1.0.24</druid.version>
+        <mysql-connector-java.version>5.1.30</mysql-connector-java.version>
+        <druid.version>1.0.24</druid.version>
+        <spring.version>3.2.13.RELEASE</spring.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dream.pay</groupId>
+                <artifactId>pay-common</artifactId>
+                <version>${pay-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+            <!-- 有赞基础架构组件依赖 start -->
+            <dependency>
+                <groupId>com.youzan.platform</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>${bootstrap.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.youzan.nova.framework</groupId>
+                <artifactId>framework-ibatis</artifactId>
+                <version>${framework-ibatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.youzan.platform</groupId>
+                <artifactId>redisclient</artifactId>
+                <version>${redisclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.youzan.dts</groupId>
+                <artifactId>dts-server</artifactId>
+                <version>${dts.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.youzan</groupId>
+                <artifactId>NSQ-Client</artifactId>
+                <version>${nsq-client.version}</version>
+            </dependency>
+            <!-- 有赞基础架构组件依赖 end -->
+            <!-- dao dependencies begin-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- dao dependencies end -->
+            <!-- spring dependencies -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
