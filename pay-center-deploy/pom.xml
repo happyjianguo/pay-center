@@ -103,23 +103,5 @@
                 <environment>dev</environment>
             </properties>
         </profile>
-        <profile>
-            <id>qa</id>
-            <properties>
-                <environment>qa</environment>
-            </properties>
-        </profile>
-        <profile>
-            <id>pre</id>
-            <properties>
-                <environment>pre</environment>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <environment>prod</environment>
-            </properties>
-        </profile>
     </profiles>
 </project>
