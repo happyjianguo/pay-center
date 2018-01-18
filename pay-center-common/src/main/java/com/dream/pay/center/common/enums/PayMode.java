@@ -1,5 +1,7 @@
 package com.dream.pay.center.common.enums;
 
+import com.dream.pay.enums.PayToolType;
+
 /**
  * 支付工具类型枚举
  *

@@ -1,8 +1,8 @@
 package com.dream.center.out.mock.facade;
 
 import com.dream.center.out.mock.dto.*;
-import com.dream.pay.center.common.enums.ChannelType;
-import com.dream.pay.center.common.enums.PayTool;
+import com.dream.pay.enums.BizChannelEnum;
+import com.dream.pay.enums.PayTool;
 
 import java.util.Date;
 
@@ -22,7 +22,7 @@ public class AcctransPayService {
         accountPayOperationResult.setPayVoucherNo("123456789");
         accountPayOperationResult.setAccountingTime(new Date());
         accountPayOperationResult.setPayTool(PayTool.BALANCE);
-        accountPayOperationResult.setBizChannel(ChannelType.DREAM);
+        accountPayOperationResult.setBizChannel(BizChannelEnum.DREAM);
 
         accountPayOperationResult.setOperateResultCode(OperationStatusEnum.SUCCESS);
         return accountPayOperationResult;

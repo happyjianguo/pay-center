@@ -1,7 +1,7 @@
 package com.dream.pay.center.service.context;
 
 import com.dream.center.out.mock.dto.OperationStatusEnum;
-import com.dream.pay.center.common.core.Money;
+import com.dream.pay.bean.Money;
 import com.dream.pay.center.common.enums.PayMode;
 import com.dream.pay.center.common.enums.PayTagEnum;
 import com.dream.pay.center.model.FundsPayDetailEntity;

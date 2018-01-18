@@ -21,30 +21,5 @@
             <artifactId>pay-center-service</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.dream.pay</groupId>
-            <artifactId>pay-center-order</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dream.pay</groupId>
-            <artifactId>pay-center-pay</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dream.pay</groupId>
-            <artifactId>pay-center-withdraw</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dream.pay</groupId>
-            <artifactId>pay-center-refund</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dream.pay</groupId>
-            <artifactId>pay-center-recharge</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
     </dependencies>
 </project>

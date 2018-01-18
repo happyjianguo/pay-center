@@ -13,12 +13,6 @@
         <module>pay-center-dao</module>
         <module>pay-center-deploy</module>
         <module>pay-center-service</module>
-        <module>pay-center-pay</module>
-        <module>pay-center-refund</module>
-        <module>pay-center-recharge</module>
-        <module>pay-center-withdraw</module>
-        <module>pay-center-transfer</module>
-        <module>pay-center-order</module>
         <module>pay-center-common</module>
         <module>pay-center-out-mock</module>
     </modules>
@@ -27,7 +21,7 @@
         <lombok.version>1.16.6</lombok.version>
         <hibernate-validator.version>4.3.2.Final</hibernate-validator.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
-        <pay-common.version>1.0-SNAPSHOT</pay-common.version>
+
         <validation-api.version>1.0.0.GA</validation-api.version>
 
         <bootstrap.version>3.1.2.4-RELEASE</bootstrap.version>
@@ -39,9 +33,14 @@
         <mybatis.version>3.2.8</mybatis.version>
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
         <druid.version>1.0.24</druid.version>
+
         <mysql-connector-java.version>5.1.30</mysql-connector-java.version>
         <druid.version>1.0.24</druid.version>
         <spring.version>3.2.13.RELEASE</spring.version>
+
+        <pay-common.version>1.0-SNAPSHOT</pay-common.version>
+        <pay-channel-access.version>1.0-SNAPSHOT</pay-channel-access.version>
+
     </properties>
 
     <dependencyManagement>
@@ -51,11 +50,7 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.dream.pay</groupId>
-                <artifactId>pay-common</artifactId>
-                <version>${pay-common.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
@@ -98,6 +93,7 @@
                 <version>${nsq-client.version}</version>
             </dependency>
             <!-- 有赞基础架构组件依赖 end -->
+
             <!-- dao dependencies begin-->
             <dependency>
                 <groupId>mysql</groupId>
@@ -120,6 +116,7 @@
                 <version>${druid.version}</version>
             </dependency>
             <!-- dao dependencies end -->
+
             <!-- spring dependencies -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -136,7 +133,20 @@
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <!-- spring dependencies end -->
 
+            <!-- pay  dependencies -->
+            <dependency>
+                <groupId>com.dream.pay</groupId>
+                <artifactId>pay-channel-access</artifactId>
+                <version>${pay-channel-access.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dream.pay</groupId>
+                <artifactId>pay-common</artifactId>
+                <version>${pay-common.version}</version>
+            </dependency>
+            <!-- pay dependencies end -->
 
         </dependencies>
     </dependencyManagement>

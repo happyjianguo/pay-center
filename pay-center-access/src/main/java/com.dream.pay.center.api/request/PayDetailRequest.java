@@ -1,8 +1,8 @@
 package com.dream.pay.center.api.request;
 
-import com.dream.pay.center.common.enums.CurrencyCode;
-import com.dream.pay.center.common.enums.PayTool;
-import com.dream.pay.center.common.enums.PayToolType;
+import com.dream.pay.enums.CurrencyCode;
+import com.dream.pay.enums.PayTool;
+import com.dream.pay.enums.PayToolType;
 import lombok.Getter;
 import lombok.Setter;
 

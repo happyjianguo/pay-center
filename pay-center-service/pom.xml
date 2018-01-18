@@ -17,24 +17,32 @@
             <artifactId>pay-center-access</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.dream.pay</groupId>
+            <artifactId>pay-channel-access</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.dream.pay</groupId>
             <artifactId>pay-center-dao</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dream.pay</groupId>
+            <artifactId>pay-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.dream.pay</groupId>
             <artifactId>pay-center-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.dream.pay</groupId>
             <artifactId>pay-center-out-mock</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.dream.pay</groupId>
-            <artifactId>pay-common</artifactId>
         </dependency>
 
         <dependency>

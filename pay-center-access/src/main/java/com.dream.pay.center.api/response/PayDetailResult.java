@@ -1,6 +1,6 @@
 package com.dream.pay.center.api.response;
 
-import com.dream.pay.center.common.enums.PayToolType;
+import com.dream.pay.enums.PayToolType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

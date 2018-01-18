@@ -1,7 +1,7 @@
 package com.dream.center.out.mock.dto;
 
-import com.dream.pay.center.common.enums.PayTool;
-import com.dream.pay.center.common.enums.PayToolType;
+import com.dream.pay.enums.PayTool;
+import com.dream.pay.enums.PayToolType;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -3,12 +3,12 @@ package com.dream.pay.center.api.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.dream.pay.bean.DataResult;
 import com.dream.pay.center.api.facade.UnifiedOrderService;
+import com.dream.pay.center.core.order.handler.UnifiedOrderCreateHandler;
 import com.dream.pay.center.service.handler.HandlerFactory;
 import com.dream.pay.center.api.request.UnifiedOrderCreateRequest;
 import com.dream.pay.center.api.request.UnifiedOrderQueryRequest;
 import com.dream.pay.center.api.response.UnifiedOrderCreateResult;
 import com.dream.pay.center.api.response.UnifiedOrderQueryResult;
-import com.dream.pay.center.order.handler.UnifiedOrderCreateHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
@@ -21,7 +21,6 @@ import javax.ws.rs.Path;
  * @author mengzhenbin
  */
 @Path("/unifiedorder")
-@Service(protocol = {"dubbo", "rest"}, registry = {"zookeeper"})
 @Slf4j
 public class UnifiedOrderServiceImpl implements UnifiedOrderService {
 

@@ -1,14 +1,6 @@
 package com.dream.pay.center.api.request;
 
-import com.dream.pay.bean.ValidationResult;
-import com.dream.pay.center.common.enums.ErrorEnum;
-import com.dream.pay.center.common.enums.PartnerIdEnum;
-import com.dream.pay.center.common.exception.IllegalArgsException;
-import com.dream.pay.enums.BizActionEnum;
-import com.dream.pay.enums.BizModeEnum;
-import com.dream.pay.enums.BizProdEnum;
-import com.dream.pay.enums.CurrencyCode;
-import com.dream.pay.utils.ValidationUtils;
+import com.dream.pay.enums.*;
 import com.dream.pay.validators.InEnum;
 import com.youzan.platform.util.json.JsonUtil;
 import lombok.*;
@@ -18,7 +10,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * 创建统一收单请求类:包含外部订单号、支付金额、收款方信息等属性

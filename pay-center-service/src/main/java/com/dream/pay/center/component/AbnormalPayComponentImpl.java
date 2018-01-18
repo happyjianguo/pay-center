@@ -4,7 +4,7 @@ import com.dream.pay.center.common.enums.PayTagEnum;
 import com.dream.pay.center.dao.FundsAbnormalPayDao;
 import com.dream.pay.center.model.FundsAbnormalPayEntity;
 import com.dream.pay.center.model.FundsPayDetailEntity;
-import com.dream.pay.center.status.JobStatus;
+import com.dream.pay.center.status.FundsJobStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +31,7 @@ public class AbnormalPayComponentImpl implements AbnormalPayComponent {
             abnormalPayDO.setPayTradeNo(fundsPayDetailEntity.getPayTradeNo());
             abnormalPayDO.setPayTradeItemsNo(fundsPayDetailEntity.getPayTradeItemsNo());
             abnormalPayDO.setPayDetailNo(fundsPayDetailEntity.getPayDetailNo());
-            abnormalPayDO.setStatus(JobStatus.TODO.getCode());
+            abnormalPayDO.setStatus(FundsJobStatus.TODO.getCode());
             abnormalPayDO.setType(payTag.getCode());
             Date now = new Date();
             abnormalPayDO.setCreateTime(now);

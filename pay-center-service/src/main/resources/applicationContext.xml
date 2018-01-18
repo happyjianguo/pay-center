@@ -26,5 +26,6 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <import resource="classpath:beans/beans-service-container.xml"/>
     <import resource="classpath:beans/beans-service-component.xml"/>
+    <import resource="classpath:beans/beans-service-dts.xml"/>
     <import resource="classpath:beans/beans-service-intergration.xml"/>
 </beans>

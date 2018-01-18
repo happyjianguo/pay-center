@@ -1,9 +1,9 @@
 package com.dream.pay.center.api.request;
 
-import com.dream.pay.center.common.enums.CurrencyCode;
-import com.dream.pay.center.common.enums.PartnerIdEnum;
-import com.dream.pay.center.common.enums.PayTool;
-import com.dream.pay.center.common.enums.PayToolType;
+import com.dream.pay.enums.CurrencyCode;
+import com.dream.pay.enums.PartnerIdEnum;
+import com.dream.pay.enums.PayTool;
+import com.dream.pay.enums.PayToolType;
 import com.dream.pay.validators.InEnum;
 import com.youzan.platform.util.json.JsonUtil;
 import lombok.Data;

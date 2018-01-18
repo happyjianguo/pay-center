@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
        default-autowire="byName">
     <!--提现状态机-->
-    <bean id="withdrawFSM" class="com.dream.pay.center.withdraw.fsm.WithdrawFSM">
+    <bean id="withdrawFSM" class="com.dream.pay.center.core.withdraw.fsm.WithdrawFSM">
         <property name="statusFlowMaps">
             <map>
                 <entry key="APPLYING" value-ref="withdrawApplyingState"/>
@@ -19,23 +19,23 @@
     </bean>
 
     <bean id="withdrawApplyingState"
-          class="com.dream.pay.center.withdraw.fsm.WithdrawApplyingState"/>
+          class="com.dream.pay.center.core.withdraw.fsm.WithdrawApplyingState"/>
     <bean id="withdrawApplyFailState"
-          class="com.dream.pay.center.withdraw.fsm.WithdrawApplyFailState"/>
+          class="com.dream.pay.center.core.withdraw.fsm.WithdrawApplyFailState"/>
     <bean id="withdrawApplySuccessState"
-          class="com.dream.pay.center.withdraw.fsm.WithdrawApplySuccessState"/>
+          class="com.dream.pay.center.core.withdraw.fsm.WithdrawApplySuccessState"/>
     <bean id="withdrawProcessingState"
-          class="com.dream.pay.center.withdraw.fsm.WithdrawProcessingState"/>
+          class="com.dream.pay.center.core.withdraw.fsm.WithdrawProcessingState"/>
     <bean id="withdrawExceptionState"
-          class="com.dream.pay.center.withdraw.fsm.WithdrawExceptionState"/>
+          class="com.dream.pay.center.core.withdraw.fsm.WithdrawExceptionState"/>
     <bean id="withdrawFailState"
-          class="com.dream.pay.center.withdraw.fsm.WithdrawFailState"/>
+          class="com.dream.pay.center.core.withdraw.fsm.WithdrawFailState"/>
     <bean id="withdrawSuccessState"
-          class="com.dream.pay.center.withdraw.fsm.WithdrawSuccessState"/>
+          class="com.dream.pay.center.core.withdraw.fsm.WithdrawSuccessState"/>
 
 
     <!--退款状态机-->
-    <bean id="refundFSM" class="com.dream.pay.center.refund.fsm.RefundFSM">
+    <bean id="refundFSM" class="com.dream.pay.center.core.refund.fsm.RefundFSM">
         <property name="statusFlowMaps">
             <map>
                 <entry key="APPLYING" value-ref="refundApplyingState"/>
@@ -49,15 +49,15 @@
     </bean>
 
     <bean id="refundApplyingState"
-          class="com.dream.pay.center.refund.fsm.RefundApplyingState"/>
+          class="com.dream.pay.center.core.refund.fsm.RefundApplyingState"/>
     <bean id="refundApplyFailState"
-          class="com.dream.pay.center.refund.fsm.RefundApplyFailState"/>
+          class="com.dream.pay.center.core.refund.fsm.RefundApplyFailState"/>
     <bean id="refundApplySuccessState"
-          class="com.dream.pay.center.refund.fsm.RefundApplySuccessState"/>
+          class="com.dream.pay.center.core.refund.fsm.RefundApplySuccessState"/>
     <bean id="refundProcessingState"
-          class="com.dream.pay.center.refund.fsm.RefundProcessingState"/>
+          class="com.dream.pay.center.core.refund.fsm.RefundProcessingState"/>
     <bean id="refundExceptionState"
-          class="com.dream.pay.center.refund.fsm.RefundExceptionState"/>
+          class="com.dream.pay.center.core.refund.fsm.RefundExceptionState"/>
     <bean id="refundSuccessState"
-          class="com.dream.pay.center.refund.fsm.RefundSuccessState"/>
+          class="com.dream.pay.center.core.refund.fsm.RefundSuccessState"/>
 </beans>

@@ -7,8 +7,8 @@ import com.dream.pay.center.api.request.WithdrawApplyRequest;
 import com.dream.pay.center.api.request.WithdrawQueryRequest;
 import com.dream.pay.center.api.response.WithdrawApplyResult;
 import com.dream.pay.center.api.response.WithdrawQueryResult;
+import com.dream.pay.center.core.withdraw.handler.WithdrawApplyHandler;
 import com.dream.pay.center.service.handler.HandlerFactory;
-import com.dream.pay.center.withdraw.handler.WithdrawApplyHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
@@ -19,7 +19,6 @@ import javax.ws.rs.Path;
  * Created by mengzhenbin on 2017/10/13.
  */
 @Path("/withdraw")
-@Service(protocol = {"dubbo", "rest"}, registry = {"zookeeper"})
 @Slf4j
 public class UnifiedWithdrawServiceImpl implements UnifiedWithdrawService {
 

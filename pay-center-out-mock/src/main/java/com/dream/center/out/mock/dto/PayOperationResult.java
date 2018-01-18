@@ -1,7 +1,7 @@
 package com.dream.center.out.mock.dto;
 
-import com.dream.pay.center.common.enums.ChannelType;
-import com.dream.pay.center.common.enums.PayTool;
+import com.dream.pay.enums.BizChannelEnum;
+import com.dream.pay.enums.PayTool;
 import com.dream.pay.utils.JsonUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +31,7 @@ public class PayOperationResult extends OperationBaseResult {
      * 支付渠道码
      */
     @NotNull(message = "支付渠道码不能为空")
-    private ChannelType bizChannel;
+    private BizChannelEnum bizChannel;
 
     /**
      * 支付明细号
@@ -80,11 +80,16 @@ public class PayOperationResult extends OperationBaseResult {
      */
     private Map<String, Object> threePartyReturnValue = new HashMap<>();
 
+    /**
+     * 渠道报文
+     */
+    private String repContent;
+
 
     public static void main(String args[]) {
         PayOperationResult operationResult = new PayOperationResult();
         operationResult.setPayTool(PayTool.ALIPAY_APP);
-        operationResult.setBizChannel(ChannelType.ALIPAY);
+        operationResult.setBizChannel(BizChannelEnum.ALIPAY);
         operationResult.setPayDetailNo("553028535955291780");
         operationResult.setPayChannelNo("23862746326436274632972");
         operationResult.setPayBankNo("3378436764297291931208320");

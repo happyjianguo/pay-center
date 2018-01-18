@@ -1,12 +1,8 @@
 package com.dream.pay.center.api.request;
 
-import com.dream.pay.bean.ValidationResult;
-import com.dream.pay.center.common.enums.BizProdEnum;
-import com.dream.pay.center.common.enums.ErrorEnum;
-import com.dream.pay.center.common.enums.PartnerIdEnum;
-import com.dream.pay.center.common.exception.IllegalArgsException;
+import com.dream.pay.enums.PartnerIdEnum;
+import com.dream.pay.enums.BizProdEnum;
 import com.dream.pay.enums.CurrencyCode;
-import com.dream.pay.utils.ValidationUtils;
 import com.dream.pay.validators.InEnum;
 import com.youzan.platform.util.json.JsonUtil;
 import lombok.Data;

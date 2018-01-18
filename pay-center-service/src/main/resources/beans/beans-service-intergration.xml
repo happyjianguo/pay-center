@@ -7,4 +7,11 @@
 
     <dubbo:protocol name="rest" port="${application.rest.port}"/>    <!--一定确定开启rest服务，否则不需要配置-->
     <dubbo:protocol name="dubbo" port="${application.dubbo.port}"/>   <!--一定确定开启dubbo服务，否则不需要配置-->
+
+    <!-- 重试三次,5s超时 -->
+    <dubbo:reference id="gatePayApplyFacade"
+                     interface="com.dream.pay.channel.access.apply.GatePayApplyFacade"
+                     retries="0" timeout="5000" protocol="dubbo" check="false" registry="zookeeper"/>
+
+
 </beans>

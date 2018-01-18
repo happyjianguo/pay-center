@@ -7,7 +7,35 @@
 	    http://code.alibabatech.com/schema/dubbo
 	    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <!-- 使用注解方式暴露接口 -->
-    <dubbo:annotation package="com.dream.pay.center.api" />
-    <dubbo:annotation package="com.dream.center.base" />
+
+    <bean id="unifiedOrderService" class="com.dream.pay.center.api.impl.UnifiedOrderServiceImpl"/>
+    <dubbo:service interface="com.dream.pay.center.api.facade.UnifiedOrderService" ref="unifiedOrderService"
+                   protocol="dubbo,rest"
+                   registry="zookeeper"/>
+
+    <bean id="unifiedPayService" class="com.dream.pay.center.api.impl.UnifiedPayServiceImpl"/>
+    <dubbo:service interface="com.dream.pay.center.api.facade.UnifiedPayService" ref="unifiedPayService"
+                   protocol="dubbo,rest"
+                   registry="zookeeper"/>
+
+    <bean id="unifiedRefundService" class="com.dream.pay.center.api.impl.UnifiedRefundServiceImpl"/>
+    <dubbo:service interface="com.dream.pay.center.api.facade.UnifiedRefundService" ref="unifiedRefundService"
+                   protocol="dubbo,rest"
+                   registry="zookeeper"/>
+
+    <bean id="unifiedRechargeService" class="com.dream.pay.center.api.impl.UnifiedRechargeServiceImpl"/>
+    <dubbo:service interface="com.dream.pay.center.api.facade.UnifiedRechargeService" ref="unifiedRechargeService"
+                   protocol="dubbo,rest"
+                   registry="zookeeper"/>
+
+    <bean id="unifiedWithdrawService" class="com.dream.pay.center.api.impl.UnifiedWithdrawServiceImpl"/>
+    <dubbo:service interface="com.dream.pay.center.api.facade.UnifiedWithdrawService" ref="unifiedWithdrawService"
+                   protocol="dubbo,rest"
+                   registry="zookeeper"/>
+
+    <bean id="unifiedTransferService" class="com.dream.pay.center.api.impl.UnifiedTransferServiceImpl"/>
+    <dubbo:service interface="com.dream.pay.center.api.facade.UnifiedTransferService" ref="unifiedTransferService"
+                   protocol="dubbo,rest"
+                   registry="zookeeper"/>
 
 </beans>

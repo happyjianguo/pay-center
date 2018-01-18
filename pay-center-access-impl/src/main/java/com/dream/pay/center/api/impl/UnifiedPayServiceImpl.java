@@ -6,8 +6,8 @@ import com.dream.pay.bean.DataResult;
 import com.dream.pay.center.api.facade.UnifiedPayService;
 import com.dream.pay.center.api.request.PaySubmitRequest;
 import com.dream.pay.center.api.response.PaySubmitResult;
-import com.dream.pay.center.pay.handler.PayNotifyHandler;
-import com.dream.pay.center.pay.handler.PaySubmitHandler;
+import com.dream.pay.center.core.pay.handler.PayNotifyHandler;
+import com.dream.pay.center.core.pay.handler.PaySubmitHandler;
 import com.dream.pay.center.service.handler.HandlerFactory;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,6 @@ import javax.ws.rs.Path;
  * @author mengzhenbin
  */
 @Path("/pay")
-@Service(protocol = {"dubbo", "rest"}, registry = {"zookeeper"})
 @Slf4j
 public class UnifiedPayServiceImpl implements UnifiedPayService {
 

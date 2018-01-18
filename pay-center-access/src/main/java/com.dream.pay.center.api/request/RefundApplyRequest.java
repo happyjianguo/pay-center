@@ -1,6 +1,5 @@
 package com.dream.pay.center.api.request;
 
-import com.dream.pay.center.common.core.Money;
 import com.dream.pay.center.common.enums.RefundMode;
 import com.dream.pay.enums.CurrencyCode;
 import com.dream.pay.utils.JsonUtil;

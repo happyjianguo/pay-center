@@ -7,7 +7,7 @@ import com.dream.pay.center.api.request.RefundApplyRequest;
 import com.dream.pay.center.api.request.RefundQueryRequest;
 import com.dream.pay.center.api.response.RefundApplyResult;
 import com.dream.pay.center.api.response.RefundQueryResult;
-import com.dream.pay.center.refund.handler.RefundApplyHandler;
+import com.dream.pay.center.core.refund.handler.RefundApplyHandler;
 import com.dream.pay.center.service.handler.HandlerFactory;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +19,6 @@ import javax.ws.rs.Path;
  * Created by mengzhenbin on 2017/10/13.
  */
 @Path("/refund")
-@Service(protocol = {"dubbo", "rest"}, registry = {"zookeeper"})
 @Slf4j
 public class UnifiedRefundServiceImpl implements UnifiedRefundService {
 
