@@ -9,6 +9,8 @@ import com.dream.pay.center.model.FundsWithdrawDetailEntity;
 import com.dream.pay.center.model.FundsWithdrawJobEntity;
 import com.dream.pay.center.service.out.ChannelService;
 import com.dream.pay.center.status.FundsWithdrawStatus;
+import com.dream.pay.channel.access.dto.WithdrawQueryRepDTO;
+import com.dream.pay.channel.access.enums.TradeStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -45,15 +47,16 @@ public class WithdrawProcessingState implements WithdrawStatusFlow {
             return OperationStatusEnum.PROCESSING;
         }
         return transactionTemplate.execute(status -> {
-            ChannelWithdrawOperationResult channelWithdrawOperationResult =
+            WithdrawQueryRepDTO withdrawQueryRepDTO =
                     channelService.withdrawQuery(fundsWithdrawDetailEntity);
-            if (channelWithdrawOperationResult.isSuccess()
-                    && OperationStatusEnum.FAIL.equals(channelWithdrawOperationResult.getOperateResultCode())) {
+            if (withdrawQueryRepDTO.isSuccess()
+                    && TradeStatus.FAIL.equals(withdrawQueryRepDTO.getTradeStatus())) {
                 //更新提现单状态【提现挂起】&失败原因
                 fundsWithdrawDetailEntity.setWithdrawStatus(FundsWithdrawStatus.EXCEPTION.getStatus());
-                fundsWithdrawDetailEntity.setOutReturnNo(channelWithdrawOperationResult.getWithdrawChannelNo());
-                fundsWithdrawDetailEntity.setOutErrorCode(channelWithdrawOperationResult.getErrorCode());
-                fundsWithdrawDetailEntity.setOutErrorMsg(channelWithdrawOperationResult.getErrorMessage());
+                fundsWithdrawDetailEntity.setOutReturnNo(withdrawQueryRepDTO.getWithdrawChannelNo());
+                fundsWithdrawDetailEntity.setOutErrorCode(withdrawQueryRepDTO.getChlRtnCode());
+                fundsWithdrawDetailEntity.setOutErrorMsg(withdrawQueryRepDTO.getChlRtnMsg());
+                fundsWithdrawDetailEntity.setOutFinishTime(withdrawQueryRepDTO.getChlFinishTime());
                 fundsWithdrawDetailEntity.setUpdateTime(new Date());
                 fundsWithdrawDetailDao.updateByPrimaryKeySelective(fundsWithdrawDetailEntity);
 
@@ -62,14 +65,14 @@ public class WithdrawProcessingState implements WithdrawStatusFlow {
 
                 //封装返回结果
                 return OperationStatusEnum.FAIL;
-            } else if (channelWithdrawOperationResult.isSuccess()
-                    && OperationStatusEnum.SUCCESS.equals(channelWithdrawOperationResult.getOperateResultCode())) {
+            } else if (withdrawQueryRepDTO.isSuccess()
+                    && TradeStatus.SUCCESS.equals(withdrawQueryRepDTO.getTradeStatus())) {
                 //更新提现单状态【提现成功】
                 fundsWithdrawDetailEntity.setWithdrawStatus(FundsWithdrawStatus.SUCCESS.getStatus());
-                fundsWithdrawDetailEntity.setOutReturnNo(channelWithdrawOperationResult.getWithdrawChannelNo());
-                fundsWithdrawDetailEntity.setOutFinishTime(channelWithdrawOperationResult.getWithdrawFinishTime());
-                fundsWithdrawDetailEntity.setOutErrorCode(channelWithdrawOperationResult.getErrorCode());
-                fundsWithdrawDetailEntity.setOutErrorMsg(channelWithdrawOperationResult.getErrorMessage());
+                fundsWithdrawDetailEntity.setOutReturnNo(withdrawQueryRepDTO.getWithdrawChannelNo());
+                fundsWithdrawDetailEntity.setOutErrorCode(withdrawQueryRepDTO.getChlRtnCode());
+                fundsWithdrawDetailEntity.setOutErrorMsg(withdrawQueryRepDTO.getChlRtnMsg());
+                fundsWithdrawDetailEntity.setOutFinishTime(withdrawQueryRepDTO.getChlFinishTime());
                 fundsWithdrawDetailEntity.setUpdateTime(new Date());
                 fundsWithdrawDetailDao.updateByPrimaryKeySelective(fundsWithdrawDetailEntity);
 

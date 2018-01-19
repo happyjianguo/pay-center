@@ -50,7 +50,7 @@ public class FundsPayDetailEntity extends BaseEntity implements Comparable<Funds
 
     private String merchantNo;
 
-    private String thirdMerchantNo;
+    private String partnerId;
 
     private String payTag;
 

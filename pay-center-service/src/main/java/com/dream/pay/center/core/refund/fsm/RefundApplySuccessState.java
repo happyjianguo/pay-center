@@ -11,6 +11,8 @@ import com.dream.pay.center.model.FundsRefundJobEntity;
 import com.dream.pay.center.model.FundsTradeItemsEntity;
 import com.dream.pay.center.service.out.ChannelService;
 import com.dream.pay.center.status.FundsRefundStatus;
+import com.dream.pay.channel.access.dto.RefundApplyRepDTO;
+import com.dream.pay.channel.access.enums.TradeStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -46,28 +48,30 @@ public class RefundApplySuccessState implements RefundStatusFlow {
             return OperationStatusEnum.UNKNOW;
         }
         return transactionTemplate.execute(status -> {
-            ChannelRefundOperationResult channelRefundOperationResult =
-                    channelService.refundApply(fundsTradeItemsEntity,fundsRefundDetailEntity);
-            if (channelRefundOperationResult.isSuccess()
-                    && OperationStatusEnum.FAIL.equals(channelRefundOperationResult.getOperateResultCode())) {
+            RefundApplyRepDTO refundApplyRepDTO =
+                    channelService.refundApply(fundsTradeItemsEntity, fundsRefundDetailEntity);
+            if (refundApplyRepDTO.isSuccess()
+                    && TradeStatus.FAIL.equals(refundApplyRepDTO.getTradeStatus())) {
                 //更新退款单状态【退款挂起】&失败原因
                 fundsRefundDetailEntity.setRefundStatus(FundsRefundStatus.EXCEPTION.getStatus());
-                fundsRefundDetailEntity.setChannelReturnNo(channelRefundOperationResult.getRefundChannelNo());
-                fundsRefundDetailEntity.setOutErrorCode(channelRefundOperationResult.getErrorCode());
-                fundsRefundDetailEntity.setOutErrorMsg(channelRefundOperationResult.getErrorMessage());
+                fundsRefundDetailEntity.setChannelReturnNo(refundApplyRepDTO.getBankRefundDetailNo());
+                fundsRefundDetailEntity.setOutErrorCode(refundApplyRepDTO.getChlRtnCode());
+                fundsRefundDetailEntity.setOutErrorMsg(refundApplyRepDTO.getChlRtnMsg());
+                fundsRefundDetailEntity.setOutFinishTime(refundApplyRepDTO.getChlFinishTime());
                 fundsRefundDetailEntity.setUpdateTime(new Date());
                 fundsRefundDetailDao.updateByPrimaryKeySelective(fundsRefundDetailEntity);
                 //更新任务为人工处理
                 fundsRefundJobDao.updateTypeById(RefundTaskEnum.EXCEPTION_SUSPENDED.getCode(), RefundTaskEnum.EXCEPTION_SUSPENDED.getDesc(), fundsRefundJobEntity.getId());
 
                 return OperationStatusEnum.FAIL;
-            } else if (channelRefundOperationResult.isSuccess()
-                    && OperationStatusEnum.SUCCESS.equals(channelRefundOperationResult.getOperateResultCode())) {
+            } else if (refundApplyRepDTO.isSuccess()
+                    && TradeStatus.SUCCESS.equals(refundApplyRepDTO.getTradeStatus())) {
                 //更新退款单状态【处理中】
                 fundsRefundDetailEntity.setRefundStatus(FundsRefundStatus.PROCESSING.getStatus());
-                fundsRefundDetailEntity.setChannelReturnNo(channelRefundOperationResult.getRefundChannelNo());
-                fundsRefundDetailEntity.setOutErrorCode(channelRefundOperationResult.getErrorCode());
-                fundsRefundDetailEntity.setOutErrorMsg(channelRefundOperationResult.getErrorMessage());
+                fundsRefundDetailEntity.setChannelReturnNo(refundApplyRepDTO.getBankRefundDetailNo());
+                fundsRefundDetailEntity.setOutErrorCode(refundApplyRepDTO.getChlRtnCode());
+                fundsRefundDetailEntity.setOutErrorMsg(refundApplyRepDTO.getChlRtnMsg());
+                fundsRefundDetailEntity.setOutFinishTime(refundApplyRepDTO.getChlFinishTime());
                 fundsRefundDetailEntity.setUpdateTime(new Date());
                 fundsRefundDetailDao.updateByPrimaryKeySelective(fundsRefundDetailEntity);
                 //更新任务为退款查询

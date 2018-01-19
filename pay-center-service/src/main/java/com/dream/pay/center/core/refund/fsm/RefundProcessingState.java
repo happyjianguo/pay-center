@@ -1,6 +1,5 @@
 package com.dream.pay.center.core.refund.fsm;
 
-import com.dream.center.out.mock.dto.ChannelRefundOperationResult;
 import com.dream.center.out.mock.dto.OperationStatusEnum;
 import com.dream.pay.center.core.refund.enums.RefundTaskEnum;
 import com.dream.pay.center.dao.FundsRefundDetailDao;
@@ -10,6 +9,8 @@ import com.dream.pay.center.model.FundsRefundJobEntity;
 import com.dream.pay.center.model.FundsTradeItemsEntity;
 import com.dream.pay.center.service.out.ChannelService;
 import com.dream.pay.center.status.FundsRefundStatus;
+import com.dream.pay.channel.access.dto.RefundQueryRepDTO;
+import com.dream.pay.channel.access.enums.TradeStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -40,21 +41,22 @@ public class RefundProcessingState implements RefundStatusFlow {
 
     @Override
     public OperationStatusEnum statusFlow(FundsTradeItemsEntity fundsTradeItemsEntity, FundsRefundDetailEntity fundsRefundDetailEntity,
-                              FundsRefundJobEntity fundsRefundJobEntity) {
+                                          FundsRefundJobEntity fundsRefundJobEntity) {
         if (fundsRefundJobEntity.getJobType() != RefundTaskEnum.INVOKE_CHANNEL_REFUND_QUERY.getCode()) {
             log.info("退款处理中,状态位不符合执行条件,[{}]!=[{}]", fundsRefundJobEntity.getJobType(), RefundTaskEnum.INVOKE_CHANNEL_REFUND_QUERY.getCode());
             return OperationStatusEnum.UNKNOW;
         }
         return transactionTemplate.execute(status -> {
-            ChannelRefundOperationResult channelRefundOperationResult =
+            RefundQueryRepDTO refundQueryRepDTO =
                     channelService.refundQuery(fundsRefundDetailEntity);
-            if (channelRefundOperationResult.isSuccess()
-                    && OperationStatusEnum.FAIL.equals(channelRefundOperationResult.getOperateResultCode())) {
+            if (refundQueryRepDTO.isSuccess()
+                    && TradeStatus.FAIL.equals(refundQueryRepDTO.getTradeStatus())) {
                 //更新退款单状态【退款挂起】&失败原因
                 fundsRefundDetailEntity.setRefundStatus(FundsRefundStatus.EXCEPTION.getStatus());
-                fundsRefundDetailEntity.setChannelReturnNo(channelRefundOperationResult.getRefundChannelNo());
-                fundsRefundDetailEntity.setOutErrorCode(channelRefundOperationResult.getErrorCode());
-                fundsRefundDetailEntity.setOutErrorMsg(channelRefundOperationResult.getErrorMessage());
+                fundsRefundDetailEntity.setChannelReturnNo(refundQueryRepDTO.getBankRefundDetailNo());
+                fundsRefundDetailEntity.setOutErrorCode(refundQueryRepDTO.getChlRtnCode());
+                fundsRefundDetailEntity.setOutErrorMsg(refundQueryRepDTO.getChlRtnMsg());
+                fundsRefundDetailEntity.setOutFinishTime(refundQueryRepDTO.getChlFinishTime());
                 fundsRefundDetailEntity.setUpdateTime(new Date());
                 fundsRefundDetailDao.updateByPrimaryKeySelective(fundsRefundDetailEntity);
 
@@ -63,14 +65,14 @@ public class RefundProcessingState implements RefundStatusFlow {
 
                 //封装返回结果
                 return OperationStatusEnum.FAIL;
-            } else if (channelRefundOperationResult.isSuccess()
-                    && OperationStatusEnum.SUCCESS.equals(channelRefundOperationResult.getOperateResultCode())) {
+            } else if (refundQueryRepDTO.isSuccess()
+                    && TradeStatus.SUCCESS.equals(refundQueryRepDTO.getTradeStatus())) {
                 //更新退款单状态【退款成功】
                 fundsRefundDetailEntity.setRefundStatus(FundsRefundStatus.SUCCESS.getStatus());
-                fundsRefundDetailEntity.setChannelReturnNo(channelRefundOperationResult.getRefundChannelNo());
-                fundsRefundDetailEntity.setOutFinishTime(channelRefundOperationResult.getRefundFinishTime());
-                fundsRefundDetailEntity.setOutErrorCode(channelRefundOperationResult.getErrorCode());
-                fundsRefundDetailEntity.setOutErrorMsg(channelRefundOperationResult.getErrorMessage());
+                fundsRefundDetailEntity.setChannelReturnNo(refundQueryRepDTO.getBankRefundDetailNo());
+                fundsRefundDetailEntity.setOutErrorCode(refundQueryRepDTO.getChlRtnCode());
+                fundsRefundDetailEntity.setOutErrorMsg(refundQueryRepDTO.getChlRtnMsg());
+                fundsRefundDetailEntity.setOutFinishTime(refundQueryRepDTO.getChlFinishTime());
                 fundsRefundDetailEntity.setUpdateTime(new Date());
                 fundsRefundDetailDao.updateByPrimaryKeySelective(fundsRefundDetailEntity);
 

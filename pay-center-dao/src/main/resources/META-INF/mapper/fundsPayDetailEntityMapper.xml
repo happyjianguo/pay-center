@@ -23,7 +23,7 @@
             <arg column="out_error_msg" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="user_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="merchant_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="third_merchant_no" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="partner_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="pay_tag" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="pay_note" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="out_biz_context" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -35,7 +35,7 @@
         id, pay_detail_no, pay_trade_items_no, pay_trade_no,biz_trade_no,pay_tool, pay_tool_type, biz_sub_action, biz_channel,
         currency, pay_amount, real_amount, pay_status,
         channel_return_no, out_return_no, out_finish_time, out_error_code, out_error_msg,
-        user_no, merchant_no, third_merchant_no, pay_tag, pay_note, out_biz_context, create_time,update_time
+        user_no, merchant_no, partner_id, pay_tag, pay_note, out_biz_context, create_time,update_time
     </sql>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from funds_pay_detail
@@ -47,7 +47,7 @@
         biz_channel, currency, pay_amount,
         real_amount, pay_status, channel_return_no, out_return_no,
         out_finish_time, out_error_code, out_error_msg,
-        user_no, merchant_no, third_merchant_no,
+        user_no, merchant_no, partner_id,
         pay_tag, pay_note, out_biz_context,
         create_time, update_time)
         values ( #{payDetailNo,jdbcType=VARCHAR}, #{payTradeItemsNo,jdbcType=VARCHAR},
@@ -56,7 +56,7 @@
         #{bizChannel,jdbcType=INTEGER}, #{currency,jdbcType=INTEGER}, #{payAmount,jdbcType=BIGINT},
         #{realAmount,jdbcType=BIGINT}, #{payStatus,jdbcType=INTEGER}, #{channelReturnNo,jdbcType=VARCHAR}, #{outReturnNo,jdbcType=VARCHAR},
         #{outFinishTime,jdbcType=TIMESTAMP}, #{outErrorCode,jdbcType=VARCHAR}, #{outErrorMsg,jdbcType=VARCHAR},
-        #{userNo,jdbcType=VARCHAR}, #{merchantNo,jdbcType=VARCHAR}, #{thirdMerchantNo,jdbcType=VARCHAR},
+        #{userNo,jdbcType=VARCHAR}, #{merchantNo,jdbcType=VARCHAR}, #{partnerId,jdbcType=VARCHAR},
         #{payTag,jdbcType=VARCHAR}, #{payNote,jdbcType=VARCHAR}, #{outBizContext,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
@@ -120,8 +120,8 @@
             <if test="merchantNo != null">
                 merchant_no,
             </if>
-            <if test="thirdMerchantNo != null">
-                third_merchant_no,
+            <if test="partnerId != null">
+                partner_id,
             </if>
             <if test="payTag != null">
                 pay_tag,
@@ -197,8 +197,8 @@
             <if test="merchantNo != null">
                 #{merchantNo,jdbcType=VARCHAR},
             </if>
-            <if test="thirdMerchantNo != null">
-                #{thirdMerchantNo,jdbcType=VARCHAR},
+            <if test="partnerId != null">
+                #{partnerId,jdbcType=VARCHAR},
             </if>
             <if test="payTag != null">
                 #{payTag,jdbcType=VARCHAR},
@@ -277,8 +277,8 @@
             <if test="merchantNo != null">
                 merchant_no = #{merchantNo,jdbcType=VARCHAR},
             </if>
-            <if test="thirdMerchantNo != null">
-                third_merchant_no = #{thirdMerchantNo,jdbcType=VARCHAR},
+            <if test="partnerId != null">
+                partner_id = #{partnerId,jdbcType=VARCHAR},
             </if>
             <if test="payTag != null">
                 pay_tag = #{payTag,jdbcType=VARCHAR},
@@ -319,7 +319,7 @@
         out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
         user_no = #{userNo,jdbcType=VARCHAR},
         merchant_no = #{merchantNo,jdbcType=VARCHAR},
-        third_merchant_no = #{thirdMerchantNo,jdbcType=VARCHAR},
+        partner_id = #{partnerId,jdbcType=VARCHAR},
         pay_tag = #{payTag,jdbcType=VARCHAR},
         pay_note = #{payNote,jdbcType=VARCHAR},
         out_biz_context = #{outBizContext,jdbcType=VARCHAR},
@@ -348,7 +348,7 @@
         out_error_msg = #{outErrorMsg,jdbcType=VARCHAR},
         user_no = #{userNo,jdbcType=VARCHAR},
         merchant_no = #{merchantNo,jdbcType=VARCHAR},
-        third_merchant_no = #{thirdMerchantNo,jdbcType=VARCHAR},
+        partner_id = #{partnerId,jdbcType=VARCHAR},
         pay_tag = #{payTag,jdbcType=VARCHAR},
         pay_note = #{payNote,jdbcType=VARCHAR},
         out_biz_context = #{outBizContext,jdbcType=VARCHAR},

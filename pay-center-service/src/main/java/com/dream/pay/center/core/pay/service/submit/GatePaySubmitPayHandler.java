@@ -4,11 +4,13 @@ import com.dream.center.out.mock.dto.OperationStatusEnum;
 import com.dream.center.out.mock.dto.PayOperationResult;
 import com.dream.pay.center.api.response.PayDetailResult;
 import com.dream.pay.center.api.response.PaySubmitResult;
+import com.dream.pay.center.common.enums.ErrorEnum;
 import com.dream.pay.center.common.exception.BusinessException;
 import com.dream.pay.center.core.pay.service.PayCoreService;
 import com.dream.pay.center.model.FundsPayDetailEntity;
 import com.dream.pay.center.service.context.FundsPayContext;
 import com.dream.pay.center.service.out.ChannelService;
+import com.dream.pay.center.status.FundsPayStatus;
 import com.dream.pay.enums.PayToolType;
 import com.dream.pay.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -42,15 +44,14 @@ public class GatePaySubmitPayHandler implements SubmitPayHandler {
 
         switch (operationStatusEnum) {
             case SUCCESS:
+                payDetailResult.setBody(payOperationResult.getRepContent());
                 payCoreService.updateTradeStatus(fundsPayContext);
-                String body = JsonUtil.toJson(payOperationResult.getThreePartyReturnValue());
-                payDetailResult.setBody(body);
                 break;
             case PROCESSING:
             case UNKNOW:
             case FAIL:
                 payDetailResult.setBody("");
-            default:
+                throw new BusinessException(ErrorEnum.SYSTEM_ERROR);
         }
         payDetailResult.setPayStatus(String.valueOf(currentDetail.getPayStatus()));//封装最终支付单状态
         paySubmitResult.getPayDetailResultList().add(payDetailResult);

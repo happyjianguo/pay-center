@@ -284,6 +284,7 @@ public class PayCoreServiceImpl implements PayCoreService {
             fundsPayDetailEntity.setPayStatus(FundsPayStatus.NO_PAY.getCode());
             fundsPayDetailEntity.setUserNo(paySubmitRequest.getUserNo());
             fundsPayDetailEntity.setMerchantNo(paySubmitRequest.getMerchantNo());
+            fundsPayDetailEntity.setPartnerId(fundsTradeInfoEntity.getPartnerId());
             fundsPayDetailEntity.setOutBizContext(paySubmitRequest.getTraceContext().getTraceId());
             fundsPayDetailEntity.setCreateTime(new Date());
             fundsPayDetailEntity.setUpdateTime(new Date());

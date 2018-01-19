@@ -7,6 +7,10 @@ import com.dream.pay.center.model.FundsPayDetailEntity;
 import com.dream.pay.center.model.FundsRefundDetailEntity;
 import com.dream.pay.center.model.FundsTradeItemsEntity;
 import com.dream.pay.center.model.FundsWithdrawDetailEntity;
+import com.dream.pay.channel.access.dto.RefundApplyRepDTO;
+import com.dream.pay.channel.access.dto.RefundQueryRepDTO;
+import com.dream.pay.channel.access.dto.WithdrawApplyRepDTO;
+import com.dream.pay.channel.access.dto.WithdrawQueryRepDTO;
 
 /**
  * 调用渠道接口
@@ -36,33 +40,33 @@ public interface ChannelService {
      *
      * @param fundsTradeItemsEntity
      * @param fundsRefundDetailEntity
-     * @return ChannelWithdrawOperationResult
+     * @return RefundApplyRepDTO
      */
-    ChannelRefundOperationResult refundApply(FundsTradeItemsEntity fundsTradeItemsEntity, FundsRefundDetailEntity fundsRefundDetailEntity);
+    RefundApplyRepDTO refundApply(FundsTradeItemsEntity fundsTradeItemsEntity, FundsRefundDetailEntity fundsRefundDetailEntity);
 
     /**
      * 提现查询接口
      *
      * @param fundsRefundDetailEntity
-     * @return ChannelRefundOperationResult
+     * @return RefundQueryRepDTO
      */
-    ChannelRefundOperationResult refundQuery(FundsRefundDetailEntity fundsRefundDetailEntity);
+    RefundQueryRepDTO refundQuery(FundsRefundDetailEntity fundsRefundDetailEntity);
 
 
     /**
      * 提现申请接口
      *
      * @param fundsWithdrawDetailEntity
-     * @return ChannelWithdrawOperationResult
+     * @return WithdrawApplyRepDTO
      */
-    ChannelWithdrawOperationResult withdrawApply(FundsWithdrawDetailEntity fundsWithdrawDetailEntity);
+    WithdrawApplyRepDTO withdrawApply(FundsWithdrawDetailEntity fundsWithdrawDetailEntity);
 
     /**
      * 提现查询接口
      *
      * @param fundsWithdrawDetailEntity
-     * @return ChannelWithdrawOperationResult
+     * @return WithdrawQueryRepDTO
      */
-    ChannelWithdrawOperationResult withdrawQuery(FundsWithdrawDetailEntity fundsWithdrawDetailEntity);
+    WithdrawQueryRepDTO withdrawQuery(FundsWithdrawDetailEntity fundsWithdrawDetailEntity);
 
 }
