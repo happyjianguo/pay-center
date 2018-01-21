@@ -17,7 +17,6 @@
         <property name="locations">
             <list>
                 <value>classpath:container.properties</value>
-                <value>classpath:jdbc.properties</value>
                 <value>classpath:dts.properties</value>
             </list>
         </property>
