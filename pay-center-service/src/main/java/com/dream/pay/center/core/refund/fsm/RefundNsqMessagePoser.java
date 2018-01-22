@@ -4,7 +4,7 @@ import com.dream.pay.center.api.message.RefundNsqMessage;
 import com.dream.pay.center.component.NsqMessagePoser;
 import com.dream.pay.center.model.FundsRefundDetailEntity;
 import com.dream.pay.center.status.FundsRefundStatus;
-import com.dream.pay.constants.UnifiedBizCode;
+import com.dream.pay.enums.UnifiedBizCode;
 import com.dream.pay.utils.BizCodeUtils;
 import com.dream.pay.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;

@@ -16,6 +16,7 @@ public enum ErrorEnum {
     IDEMPOTENT_EXCEPTION("E1000001", "幂等性检查异常"),
     UN_KNOW_EXCEPTION("E1000002", "未知异常"),
     ARGUMENT_INVALID("E1000003", "参数异常"),
+    INVOKE_CHANNEL_ERROR("E1000004", "调用渠道系统失败"),
 
     /**
      * 支付部分错误码

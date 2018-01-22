@@ -51,7 +51,7 @@ public class GatePaySubmitPayHandler implements SubmitPayHandler {
             case UNKNOW:
             case FAIL:
                 payDetailResult.setBody("");
-                throw new BusinessException(ErrorEnum.SYSTEM_ERROR);
+                throw new BusinessException(ErrorEnum.INVOKE_CHANNEL_ERROR);
         }
         payDetailResult.setPayStatus(String.valueOf(currentDetail.getPayStatus()));//封装最终支付单状态
         paySubmitResult.getPayDetailResultList().add(payDetailResult);
