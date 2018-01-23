@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 @Slf4j
 public class RefundNsqMessagePoser extends NsqMessagePoser {
 
-    @Value("${refund_messgae_topic}")
+    @Value("${nsq.refund.messgae.producer.topic}")
     private String topic;
 
     /**

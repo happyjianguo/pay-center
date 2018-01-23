@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--公用NSQ集群-->
+    <bean name="nsqAllConfig" class="com.dream.pay.nsq.config.NsqConfig">
+        <property name="serverAddresses" value="${cluser.nsq.all.host}:${cluser.nsq.all.port}"/>
+    </bean>
+
+    <!--公用NSQ集群生产者-->
+    <bean name="nsqAllProducer" class="com.dream.pay.nsq.NsqProducer">
+        <property name="nsqConfig" ref="nsqAllConfig"/>
+    </bean>
+
+    <!--支付成功消息消费者-->
+    <bean name="payNotifyNsqConsumer" class="com.dream.pay.nsq.NsqConsumer">
+        <property name="nsqConfig" ref="nsqAllConfig"/>
+        <property name="listener" ref="payNotifyConsumerListener"/>
+        <property name="topic" value="${nsq.paynotify.consumer.topic}"/>
+        <property name="channel" value="${nsq.paynotify.consumer.channel}"/>
+    </bean>
+
+    <!--支付成功消息监听者-->
+    <bean id="payNotifyConsumerListener"
+          class="com.dream.pay.center.core.pay.nsq.NsqPayNotifyConsumer"/>
+
+</beans>

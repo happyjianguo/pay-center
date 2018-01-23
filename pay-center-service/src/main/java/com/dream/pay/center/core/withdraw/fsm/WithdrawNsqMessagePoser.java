@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 @Slf4j
 public class WithdrawNsqMessagePoser extends NsqMessagePoser {
 
-    @Value("${withdraw_messgae_topic}")
+    @Value("${nsq.withdraw.messgae.producer.topic}")
     private String topic;
 
     /**

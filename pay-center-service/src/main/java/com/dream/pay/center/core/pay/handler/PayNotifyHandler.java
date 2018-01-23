@@ -62,7 +62,7 @@ public class PayNotifyHandler extends
     @Resource
     protected PayCoreService payCoreService;
 
-    @Value("${pay_messgae_topic}")
+    @Value("${nsq.pay.messgae.producer.topic}")
     private String topic;
 
 
