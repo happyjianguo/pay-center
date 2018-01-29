@@ -1,6 +1,5 @@
 package com.dream.pay.center.api.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.dream.pay.bean.DataResult;
 import com.dream.pay.center.api.facade.UnifiedRefundService;
 import com.dream.pay.center.api.request.RefundApplyRequest;
@@ -16,7 +15,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
- * Created by mengzhenbin on 2017/10/13.
+ * 统一退款服务实现类。
+ *
+ * @author mengzhenbin
  */
 @Path("/refund")
 @Slf4j

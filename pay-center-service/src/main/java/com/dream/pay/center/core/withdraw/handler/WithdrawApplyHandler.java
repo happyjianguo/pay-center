@@ -166,18 +166,18 @@ public class WithdrawApplyHandler extends
      * @return FundsWithdrawJobEntity
      */
     private FundsWithdrawJobEntity composeWithdrawJob(FundsWithdrawDetailEntity withdrawDetailEntity, FundsTradeItemsEntity fundsTradeItemsEntity) {
-        FundsWithdrawJobEntity fundsWithdrawJobEntity = new FundsWithdrawJobEntity();
-        fundsWithdrawJobEntity.setWithdrawDetailNo(withdrawDetailEntity.getWithdrawDetailNo());
-        fundsWithdrawJobEntity.setPayTradeItemsNo(withdrawDetailEntity.getPayTradeItemsNo());
-        fundsWithdrawJobEntity.setPayTradeNo(fundsTradeItemsEntity.getPayTradeNo());
-        fundsWithdrawJobEntity.setJobType(WithdrawTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getCode());
-        fundsWithdrawJobEntity.setJobTypeDesc(WithdrawTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getDesc());
-        fundsWithdrawJobEntity.setJobStatus(FundsJobStatus.TODO.getCode());
-        fundsWithdrawJobEntity.setJobRunCount(0);
-        fundsWithdrawJobEntity.setJobLevel("T1");//默认T+1提交
-        fundsWithdrawJobEntity.setEnv(env);
-        fundsWithdrawJobEntity.setCreateTime(new Date());
-        fundsWithdrawJobEntity.setUpdateTime(new Date());
+        FundsWithdrawJobEntity fundsWithdrawJobEntity = FundsWithdrawJobEntity.builder()
+                .withdrawDetailNo(withdrawDetailEntity.getWithdrawDetailNo())
+                .payTradeItemsNo(withdrawDetailEntity.getPayTradeItemsNo())
+                .payTradeNo(fundsTradeItemsEntity.getPayTradeNo())
+                .jobType(WithdrawTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getCode())
+                .jobTypeDesc(WithdrawTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getDesc())
+                .jobStatus(FundsJobStatus.TODO.getCode())
+                .jobRunCount(0)
+                .jobLevel("T1")//默认T+1提交
+                .env(env)
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsWithdrawJobEntity;
     }
 
@@ -191,29 +191,29 @@ public class WithdrawApplyHandler extends
      * @return FundsWithdrawDetailEntity
      */
     private FundsWithdrawDetailEntity composeWithdrawDetail(FundsTradeInfoEntity fundsTradeInfoEntity, FundsTradeItemsEntity fundsTradeItemsEntity, WithdrawApplyRequest withdrawApplyRequest, BankCardInfoResult bankCardInfo) {
-        FundsWithdrawDetailEntity fundsWithdrawDetailEntity = new FundsWithdrawDetailEntity();
-        fundsWithdrawDetailEntity.setWithdrawDetailNo(serialidGenerator.get());
-        fundsWithdrawDetailEntity.setBizTradeNo(fundsTradeInfoEntity.getBizTradeNo());
-        fundsWithdrawDetailEntity.setPayTradeNo(fundsTradeItemsEntity.getPayTradeNo());
-        fundsWithdrawDetailEntity.setPayTradeItemsNo(fundsTradeItemsEntity.getPayTradeItemsNo());
-        fundsWithdrawDetailEntity.setCurrency(Integer.valueOf(withdrawApplyRequest.getCurrencyCode()));
-        fundsWithdrawDetailEntity.setWithdrawAmount(fundsTradeItemsEntity.getTradeAmount());
-        fundsWithdrawDetailEntity.setWithdrawStatus(WithdrawStatusEnum.APPLYING.getStatus());
-        fundsWithdrawDetailEntity.setMerchantNo(withdrawApplyRequest.getMerchantNo());
-        fundsWithdrawDetailEntity.setPartnerId(fundsTradeInfoEntity.getPartnerId());
-        fundsWithdrawDetailEntity.setCustAccountType(withdrawApplyRequest.getBizProd());
-        fundsWithdrawDetailEntity.setInstId(bankCardInfo.getBankCode());
-        fundsWithdrawDetailEntity.setInstName(bankCardInfo.getBankName());
-        fundsWithdrawDetailEntity.setInstBranchName(bankCardInfo.getSubbranch());
-        fundsWithdrawDetailEntity.setInstProvince(bankCardInfo.getProvince());
-        fundsWithdrawDetailEntity.setInstCity(bankCardInfo.getCity());
-        fundsWithdrawDetailEntity.setInstAccountNo(bankCardInfo.getCardNo());
-        fundsWithdrawDetailEntity.setInstAccountName(bankCardInfo.getCardholder());
-        fundsWithdrawDetailEntity.setInstAccountType(bankCardInfo.getCardAccountType());
-        fundsWithdrawDetailEntity.setInstCardType(bankCardInfo.getCardType());
-        fundsWithdrawDetailEntity.setWithdrawNote(buildWithdrawNote(withdrawApplyRequest));
-        fundsWithdrawDetailEntity.setCreateTime(new Date());
-        fundsWithdrawDetailEntity.setUpdateTime(new Date());
+        FundsWithdrawDetailEntity fundsWithdrawDetailEntity = FundsWithdrawDetailEntity.builder()
+                .withdrawDetailNo(serialidGenerator.get())
+                .bizTradeNo(fundsTradeInfoEntity.getBizTradeNo())
+                .payTradeNo(fundsTradeItemsEntity.getPayTradeNo())
+                .payTradeItemsNo(fundsTradeItemsEntity.getPayTradeItemsNo())
+                .currency(Integer.valueOf(withdrawApplyRequest.getCurrencyCode()))
+                .withdrawAmount(fundsTradeItemsEntity.getTradeAmount())
+                .withdrawStatus(WithdrawStatusEnum.APPLYING.getStatus())
+                .merchantNo(withdrawApplyRequest.getMerchantNo())
+                .partnerId(fundsTradeInfoEntity.getPartnerId())
+                .custAccountType(withdrawApplyRequest.getBizProd())
+                .instId(bankCardInfo.getBankCode())
+                .instName(bankCardInfo.getBankName())
+                .instBranchName(bankCardInfo.getSubbranch())
+                .instProvince(bankCardInfo.getProvince())
+                .instCity(bankCardInfo.getCity())
+                .instAccountNo(bankCardInfo.getCardNo())
+                .instAccountName(bankCardInfo.getCardholder())
+                .instAccountType(bankCardInfo.getCardAccountType())
+                .instCardType(bankCardInfo.getCardType())
+                .withdrawNote(buildWithdrawNote(withdrawApplyRequest))
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsWithdrawDetailEntity;
     }
 
@@ -240,17 +240,17 @@ public class WithdrawApplyHandler extends
      * @return FundsTradeItemsEntity
      */
     private FundsTradeItemsEntity composeTradeItemInfo(FundsTradeInfoEntity fundsTradeInfoEntity) {
-        FundsTradeItemsEntity fundsTradeItemsEntity = new FundsTradeItemsEntity();
-        fundsTradeItemsEntity.setPayTradeItemsNo(serialidGenerator.get());
-        fundsTradeItemsEntity.setPayTradeNo(fundsTradeInfoEntity.getPayTradeNo());
-        fundsTradeItemsEntity.setBizTradeNo(fundsTradeInfoEntity.getBizTradeNo());
-        fundsTradeItemsEntity.setBizAction(BizActionEnum.WITHDRAW.getCode());
-        fundsTradeItemsEntity.setFundsInOut(InOutEnum.OUT.getValue());
-        fundsTradeItemsEntity.setTradeAmount(fundsTradeInfoEntity.getTradeAmount());
-        fundsTradeItemsEntity.setMerchantNo(fundsTradeInfoEntity.getMerchantNo());
-        fundsTradeItemsEntity.setTradeState(fundsTradeInfoEntity.getTradeState());
-        fundsTradeItemsEntity.setCreateTime(new Date());
-        fundsTradeItemsEntity.setUpdateTime(new Date());
+        FundsTradeItemsEntity fundsTradeItemsEntity = FundsTradeItemsEntity.builder()
+                .payTradeItemsNo(serialidGenerator.get())
+                .payTradeNo(fundsTradeInfoEntity.getPayTradeNo())
+                .bizTradeNo(fundsTradeInfoEntity.getBizTradeNo())
+                .bizAction(BizActionEnum.WITHDRAW.getCode())
+                .fundsInOut(InOutEnum.OUT.getValue())
+                .tradeAmount(fundsTradeInfoEntity.getTradeAmount())
+                .merchantNo(fundsTradeInfoEntity.getMerchantNo())
+                .tradeState(fundsTradeInfoEntity.getTradeState())
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsTradeItemsEntity;
     }
 
@@ -261,24 +261,24 @@ public class WithdrawApplyHandler extends
      * @return FundsTradeItemsEntity
      */
     private FundsTradeInfoEntity composeTradeInfo(WithdrawApplyRequest withdrawApplyRequest) {
-        FundsTradeInfoEntity fundsTradeInfoEntity = new FundsTradeInfoEntity();
-        fundsTradeInfoEntity.setPayTradeNo(serialidGenerator.get());
-        fundsTradeInfoEntity.setBizTradeNo(withdrawApplyRequest.getOutBizNo());
-        fundsTradeInfoEntity.setBizTradeName(withdrawApplyRequest.getMemo());
-        fundsTradeInfoEntity.setBizProd(withdrawApplyRequest.getBizProd());
-        fundsTradeInfoEntity.setBizMode(BizModeEnum.TRADING_MODE_INSTANT.getCode());
-        fundsTradeInfoEntity.setBizAction(BizActionEnum.WITHDRAW.getCode());
-        fundsTradeInfoEntity.setMerchantNo(Long.valueOf(withdrawApplyRequest.getMerchantNo()));
-        fundsTradeInfoEntity.setPartnerId(withdrawApplyRequest.getPartnerId());
-        fundsTradeInfoEntity.setCurrency(Integer.valueOf(withdrawApplyRequest.getCurrencyCode()));
-        fundsTradeInfoEntity.setTradeAmount(withdrawApplyRequest.getWithdrawAmount());
-        fundsTradeInfoEntity.setTradeState(FundsTradeStatus.CREATE.getCode());
-        fundsTradeInfoEntity.setSettledState(FundsTradeSettleStatus.NONE.getCode());
-        fundsTradeInfoEntity.setNotifyState(FundsTradeNotifyStatus.NONE.getCode());
-        fundsTradeInfoEntity.setExtraInfo(withdrawApplyRequest.getExtInfo());
-        fundsTradeInfoEntity.setOutBizContext(withdrawApplyRequest.getTraceContext().getTraceId());
-        fundsTradeInfoEntity.setCreateTime(new Date());
-        fundsTradeInfoEntity.setUpdateTime(new Date());
+        FundsTradeInfoEntity fundsTradeInfoEntity = FundsTradeInfoEntity.builder()
+                .payTradeNo(serialidGenerator.get())
+                .bizTradeNo(withdrawApplyRequest.getOutBizNo())
+                .bizTradeName(withdrawApplyRequest.getMemo())
+                .bizProd(withdrawApplyRequest.getBizProd())
+                .bizMode(BizModeEnum.TRADING_MODE_INSTANT.getCode())
+                .bizAction(BizActionEnum.WITHDRAW.getCode())
+                .merchantNo(Long.valueOf(withdrawApplyRequest.getMerchantNo()))
+                .partnerId(withdrawApplyRequest.getPartnerId())
+                .currency(Integer.valueOf(withdrawApplyRequest.getCurrencyCode()))
+                .tradeAmount(withdrawApplyRequest.getWithdrawAmount())
+                .tradeState(FundsTradeStatus.CREATE.getCode())
+                .settledState(FundsTradeSettleStatus.NONE.getCode())
+                .notifyState(FundsTradeNotifyStatus.NONE.getCode())
+                .extraInfo(withdrawApplyRequest.getExtInfo())
+                .outBizContext(withdrawApplyRequest.getTraceContext().getTraceId())
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsTradeInfoEntity;
     }
 

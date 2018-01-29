@@ -14,11 +14,9 @@ import com.dream.pay.center.service.sequence.SerialidGenerator;
 import com.dream.pay.center.status.FundsTradeNotifyStatus;
 import com.dream.pay.center.status.FundsTradeSettleStatus;
 import com.dream.pay.center.status.FundsTradeStatus;
-import com.dream.pay.enums.CurrencyCode;
 import com.dream.pay.utils.DateUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -115,27 +113,27 @@ public class UnifiedOrderCreateHandler extends
      * @return FundsTradeInfoEntity
      */
     private FundsTradeInfoEntity composeTradeInfo(UnifiedOrderCreateRequest request) {
-        FundsTradeInfoEntity fundsTradeInfoEntity = new FundsTradeInfoEntity();
-        fundsTradeInfoEntity.setPayTradeNo(serialidGenerator.get());
-        fundsTradeInfoEntity.setBizTradeNo(request.getBizTradeNo());
-        fundsTradeInfoEntity.setBizTradeName(request.getTradeDesc());
-        fundsTradeInfoEntity.setBizProd(request.getBizProd());
-        fundsTradeInfoEntity.setBizMode(request.getBizMode());
-        fundsTradeInfoEntity.setBizAction(request.getBizAction());
-        fundsTradeInfoEntity.setMerchantNo(NumberUtils.isNumber(request.getMerchantNo()) ? Long.valueOf(request.getMerchantNo()) : 0);
-        fundsTradeInfoEntity.setUserNo(request.getUserNo());
-        fundsTradeInfoEntity.setUserName(request.getUserName());
-        fundsTradeInfoEntity.setPartnerId(request.getPartnerId());
-        fundsTradeInfoEntity.setCurrency(NumberUtils.isNumber(request.getCurrencyCode()) ? Integer.valueOf(request.getCurrencyCode()) : Integer.valueOf(CurrencyCode.CNY.getAlpha()));
-        fundsTradeInfoEntity.setTradeAmount(request.getTradeAmount());
-        fundsTradeInfoEntity.setTradeState(FundsTradeStatus.CREATE.getCode());
-        fundsTradeInfoEntity.setSettledState(FundsTradeSettleStatus.CREATE.getCode());
-        fundsTradeInfoEntity.setNotifyState(FundsTradeNotifyStatus.NONE.getCode());
-        fundsTradeInfoEntity.setExpiredTime(DateUtil.StringToDateTime(request.getExpiredTime()));
-        fundsTradeInfoEntity.setExtraInfo(request.getExtendInfo());
-        fundsTradeInfoEntity.setOutBizContext(request.getTraceContext().getTraceId());
-        fundsTradeInfoEntity.setCreateTime(new Date());
-        fundsTradeInfoEntity.setUpdateTime(new Date());
+        FundsTradeInfoEntity fundsTradeInfoEntity = FundsTradeInfoEntity.builder()
+                .payTradeNo(serialidGenerator.get())
+                .bizTradeNo(request.getBizTradeNo())
+                .bizTradeName(request.getTradeDesc())
+                .bizProd(request.getBizProd())
+                .bizMode(request.getBizMode())
+                .bizAction(request.getBizAction())
+                .merchantNo(Long.valueOf(request.getMerchantNo()))
+                .userNo(request.getUserNo())
+                .userName(request.getUserName())
+                .partnerId(request.getPartnerId())
+                .currency(Integer.valueOf(request.getCurrencyCode()))
+                .tradeAmount(request.getTradeAmount())
+                .tradeState(FundsTradeStatus.CREATE.getCode())
+                .settledState(FundsTradeSettleStatus.CREATE.getCode())
+                .notifyState(FundsTradeNotifyStatus.NONE.getCode())
+                .expiredTime(DateUtil.StringToDateTime(request.getExpiredTime()))
+                .extraInfo(request.getExtendInfo())
+                .outBizContext(request.getTraceContext().getTraceId())
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsTradeInfoEntity;
     }
 }

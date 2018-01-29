@@ -1,5 +1,6 @@
 package com.dream.pay.center.api.message;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @version WithdrawNsqMessage.java
  */
 @Data
+@Builder
 public class WithdrawNsqMessage extends NsqEntity implements Serializable {
 
     private static final long serialVersionUID = 8513353130770135227L;

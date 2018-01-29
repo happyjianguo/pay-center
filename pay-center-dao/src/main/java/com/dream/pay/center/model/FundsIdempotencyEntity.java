@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class FundsIdempotencyEntity extends BaseEntity {

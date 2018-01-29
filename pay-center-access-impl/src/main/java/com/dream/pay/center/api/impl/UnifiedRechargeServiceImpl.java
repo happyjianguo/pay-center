@@ -1,6 +1,5 @@
 package com.dream.pay.center.api.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.dream.pay.bean.DataResult;
 import com.dream.pay.center.api.facade.UnifiedRechargeService;
 import com.dream.pay.center.api.request.RechargeApplyRequest;
@@ -14,7 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
- * 统一收单服务实现类。
+ * 统一充值服务实现类。
  *
  * @author mengzhenbin
  */

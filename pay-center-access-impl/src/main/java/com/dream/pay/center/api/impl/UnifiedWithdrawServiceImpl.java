@@ -1,6 +1,5 @@
 package com.dream.pay.center.api.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.dream.pay.bean.DataResult;
 import com.dream.pay.center.api.facade.UnifiedWithdrawService;
 import com.dream.pay.center.api.request.WithdrawApplyRequest;
@@ -16,7 +15,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
- * Created by mengzhenbin on 2017/10/13.
+ * 统一提现服务实现类。
+ *
+ * @author mengzhenbin
  */
 @Path("/withdraw")
 @Slf4j

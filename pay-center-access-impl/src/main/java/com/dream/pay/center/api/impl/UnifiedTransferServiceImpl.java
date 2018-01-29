@@ -10,7 +10,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
- * Created by mengzhenbin on 2017/10/13.
+ * 统一转账服务实现类。
+ *
+ * @author mengzhenbin
  */
 @Path("/transfer")
 @Slf4j

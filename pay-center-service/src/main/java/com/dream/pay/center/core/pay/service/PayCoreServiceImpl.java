@@ -271,23 +271,23 @@ public class PayCoreServiceImpl implements PayCoreService {
     private List<FundsPayDetailEntity> composePayDetailInfo(FundsTradeInfoEntity fundsTradeInfoEntity, FundsTradeItemsEntity fundsTradeItemsEntity, PaySubmitRequest paySubmitRequest) {
         List<FundsPayDetailEntity> payDetailEntitys = new ArrayList<FundsPayDetailEntity>();
         for (PayDetailRequest payDetailRequest : paySubmitRequest.getPayDetailInfoList()) {
-            FundsPayDetailEntity fundsPayDetailEntity = new FundsPayDetailEntity();
-            fundsPayDetailEntity.setPayDetailNo(serialidGenerator.get());
-            fundsPayDetailEntity.setPayTradeItemsNo(fundsTradeItemsEntity.getPayTradeItemsNo());
-            fundsPayDetailEntity.setPayTradeNo(fundsTradeInfoEntity.getPayTradeNo());
-            fundsPayDetailEntity.setBizTradeNo(fundsTradeInfoEntity.getBizTradeNo());
-            fundsPayDetailEntity.setPayTool(payDetailRequest.getPayTool().name());
-            fundsPayDetailEntity.setPayToolType(payDetailRequest.getPayToolType().key());
-            fundsPayDetailEntity.setBizSubAction(payDetailRequest.getPayTool().getBizSubAction());
-            fundsPayDetailEntity.setCurrency(Integer.valueOf(paySubmitRequest.getCurrencyCode()));
-            fundsPayDetailEntity.setPayAmount(payDetailRequest.getPayAmount());
-            fundsPayDetailEntity.setPayStatus(FundsPayStatus.NO_PAY.getCode());
-            fundsPayDetailEntity.setUserNo(paySubmitRequest.getUserNo());
-            fundsPayDetailEntity.setMerchantNo(paySubmitRequest.getMerchantNo());
-            fundsPayDetailEntity.setPartnerId(fundsTradeInfoEntity.getPartnerId());
-            fundsPayDetailEntity.setOutBizContext(paySubmitRequest.getTraceContext().getTraceId());
-            fundsPayDetailEntity.setCreateTime(new Date());
-            fundsPayDetailEntity.setUpdateTime(new Date());
+            FundsPayDetailEntity fundsPayDetailEntity = FundsPayDetailEntity.builder()
+                    .payDetailNo(serialidGenerator.get())
+                    .payTradeItemsNo(fundsTradeItemsEntity.getPayTradeItemsNo())
+                    .payTradeNo(fundsTradeInfoEntity.getPayTradeNo())
+                    .bizTradeNo(fundsTradeInfoEntity.getBizTradeNo())
+                    .payTool(payDetailRequest.getPayTool().name())
+                    .payToolType(payDetailRequest.getPayToolType().key())
+                    .bizSubAction(payDetailRequest.getPayTool().getBizSubAction())
+                    .currency(Integer.valueOf(paySubmitRequest.getCurrencyCode()))
+                    .payAmount(payDetailRequest.getPayAmount())
+                    .payStatus(FundsPayStatus.NO_PAY.getCode())
+                    .userNo(paySubmitRequest.getUserNo())
+                    .merchantNo(paySubmitRequest.getMerchantNo())
+                    .partnerId(fundsTradeInfoEntity.getPartnerId())
+                    .outBizContext(paySubmitRequest.getTraceContext().getTraceId())
+                    .createTime(new Date())
+                    .updateTime(new Date()).build();
             payDetailEntitys.add(fundsPayDetailEntity);
         }
         Collections.sort(payDetailEntitys);
@@ -303,20 +303,20 @@ public class PayCoreServiceImpl implements PayCoreService {
      * @return FundsTradeItemsEntity
      */
     private FundsTradeItemsEntity composeTradeItemInfo(FundsTradeInfoEntity fundsTradeInfoEntity, PaySubmitRequest paySubmitRequest) {
-        FundsTradeItemsEntity fundsTradeItemsEntity = new FundsTradeItemsEntity();
-        fundsTradeItemsEntity.setPayTradeItemsNo(serialidGenerator.get());
-        fundsTradeItemsEntity.setPayTradeNo(fundsTradeInfoEntity.getPayTradeNo());
-        fundsTradeItemsEntity.setBizTradeNo(fundsTradeInfoEntity.getBizTradeNo());
-        fundsTradeItemsEntity.setBizAction(BizActionEnum.PAY.getCode());
-        fundsTradeItemsEntity.setFundsInOut(InOutEnum.IN.getValue());
-        fundsTradeItemsEntity.setMode(paySubmitRequest.getPayMode());
-        fundsTradeItemsEntity.setTradeAmount(fundsTradeInfoEntity.getTradeAmount());
-        fundsTradeItemsEntity.setMerchantNo(fundsTradeInfoEntity.getMerchantNo());
-        fundsTradeItemsEntity.setUserNo(fundsTradeInfoEntity.getUserNo());
-        fundsTradeItemsEntity.setTradeState(FundsTradeItemStatus.CREATE.getCode());
-        fundsTradeItemsEntity.setTradeNote(PayMode.getByCode(paySubmitRequest.getPayMode()).desc());
-        fundsTradeItemsEntity.setCreateTime(new Date());
-        fundsTradeItemsEntity.setUpdateTime(new Date());
+        FundsTradeItemsEntity fundsTradeItemsEntity = FundsTradeItemsEntity.builder()
+                .payTradeItemsNo(serialidGenerator.get())
+                .payTradeNo(fundsTradeInfoEntity.getPayTradeNo())
+                .bizTradeNo(fundsTradeInfoEntity.getBizTradeNo())
+                .bizAction(BizActionEnum.PAY.getCode())
+                .fundsInOut(InOutEnum.IN.getValue())
+                .mode(paySubmitRequest.getPayMode())
+                .tradeAmount(fundsTradeInfoEntity.getTradeAmount())
+                .merchantNo(fundsTradeInfoEntity.getMerchantNo())
+                .userNo(fundsTradeInfoEntity.getUserNo())
+                .tradeState(FundsTradeItemStatus.CREATE.getCode())
+                .tradeNote(PayMode.getByCode(paySubmitRequest.getPayMode()).desc())
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsTradeItemsEntity;
     }
 

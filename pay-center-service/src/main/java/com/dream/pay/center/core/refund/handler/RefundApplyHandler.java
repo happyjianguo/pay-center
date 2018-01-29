@@ -191,17 +191,17 @@ public class RefundApplyHandler extends
      * @return FundsRefundJobEntity
      */
     private FundsRefundJobEntity composeRefundJob(FundsRefundDetailEntity fundsRefundDetailEntity) {
-        FundsRefundJobEntity fundsRefundJobEntity = new FundsRefundJobEntity();
-        fundsRefundJobEntity.setRefundDetailNo(fundsRefundDetailEntity.getRefundDetailNo());
-        fundsRefundJobEntity.setPayTradeItemsNo(fundsRefundDetailEntity.getPayTradeItemsNo());
-        fundsRefundJobEntity.setPayTradeNo(fundsRefundDetailEntity.getPayTradeNo());
-        fundsRefundJobEntity.setJobType(RefundTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getCode());
-        fundsRefundJobEntity.setJobTypeDesc(RefundTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getDesc());
-        fundsRefundJobEntity.setJobStatus(FundsJobStatus.TODO.getCode());
-        fundsRefundJobEntity.setJobRunCount(0);
-        fundsRefundJobEntity.setEnv(env);
-        fundsRefundJobEntity.setCreateTime(new Date());
-        fundsRefundJobEntity.setUpdateTime(new Date());
+        FundsRefundJobEntity fundsRefundJobEntity = FundsRefundJobEntity.builder()
+                .refundDetailNo(fundsRefundDetailEntity.getRefundDetailNo())
+                .payTradeItemsNo(fundsRefundDetailEntity.getPayTradeItemsNo())
+                .payTradeNo(fundsRefundDetailEntity.getPayTradeNo())
+                .jobType(RefundTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getCode())
+                .jobTypeDesc(RefundTaskEnum.INVOKE_ACCOUNT_TRANS_OUT.getDesc())
+                .jobStatus(FundsJobStatus.TODO.getCode())
+                .jobRunCount(0)
+                .env(env)
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsRefundJobEntity;
     }
 
@@ -215,23 +215,23 @@ public class RefundApplyHandler extends
      * @return FundsRefundDetailEntity
      */
     private FundsRefundDetailEntity composeRefundDetail(FundsTradeInfoEntity fundsTradeInfoEntity, FundsPayDetailEntity fundsPayDetailEntity, RefundApplyRequest refundApplyRequest, Long refundAmount) {
-        FundsRefundDetailEntity fundsRefundDetailEntity = new FundsRefundDetailEntity();
-        fundsRefundDetailEntity.setRefundDetailNo(serialidGenerator.get());
-        fundsRefundDetailEntity.setBizTradeNo(fundsPayDetailEntity.getBizTradeNo());
-        fundsRefundDetailEntity.setPayTradeNo(fundsPayDetailEntity.getPayTradeNo());
-        fundsRefundDetailEntity.setPayTradeItemsNo(fundsPayDetailEntity.getPayTradeItemsNo());
-        fundsRefundDetailEntity.setCurrency(Integer.valueOf(fundsPayDetailEntity.getCurrency()));
-        fundsRefundDetailEntity.setRefundAmount(refundAmount);
-        fundsRefundDetailEntity.setRefundStatus(RefundStatusEnum.APPLYING.getStatus());
-        fundsRefundDetailEntity.setMerchantNo(String.valueOf(fundsPayDetailEntity.getMerchantNo()));
-        fundsRefundDetailEntity.setRefundMode(refundApplyRequest.getRefundMode());
-        fundsRefundDetailEntity.setPayAmount(fundsPayDetailEntity.getPayAmount());
-        fundsRefundDetailEntity.setPayDetailNo(fundsPayDetailEntity.getPayDetailNo());
-        fundsRefundDetailEntity.setChannelPayDetailNo(fundsPayDetailEntity.getChannelReturnNo());
-        fundsRefundDetailEntity.setPayTool(fundsPayDetailEntity.getPayTool());
-        fundsRefundDetailEntity.setRefundNote(buildRefundNote(fundsTradeInfoEntity, fundsPayDetailEntity));
-        fundsRefundDetailEntity.setCreateTime(new Date());
-        fundsRefundDetailEntity.setUpdateTime(new Date());
+        FundsRefundDetailEntity fundsRefundDetailEntity = FundsRefundDetailEntity.builder()
+                .refundDetailNo(serialidGenerator.get())
+                .bizTradeNo(fundsPayDetailEntity.getBizTradeNo())
+                .payTradeNo(fundsPayDetailEntity.getPayTradeNo())
+                .payTradeItemsNo(fundsPayDetailEntity.getPayTradeItemsNo())
+                .currency(Integer.valueOf(fundsPayDetailEntity.getCurrency()))
+                .refundAmount(refundAmount)
+                .refundStatus(RefundStatusEnum.APPLYING.getStatus())
+                .merchantNo(String.valueOf(fundsPayDetailEntity.getMerchantNo()))
+                .refundMode(refundApplyRequest.getRefundMode())
+                .payAmount(fundsPayDetailEntity.getPayAmount())
+                .payDetailNo(fundsPayDetailEntity.getPayDetailNo())
+                .channelPayDetailNo(fundsPayDetailEntity.getChannelReturnNo())
+                .payTool(fundsPayDetailEntity.getPayTool())
+                .refundNote(buildRefundNote(fundsTradeInfoEntity, fundsPayDetailEntity))
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsRefundDetailEntity;
     }
 
@@ -260,19 +260,19 @@ public class RefundApplyHandler extends
      * @return FundsTradeItemsEntity
      */
     private FundsTradeItemsEntity composeTradeItemInfo(FundsTradeInfoEntity fundsTradeInfoEntity, RefundApplyRequest refundApplyRequest) {
-        FundsTradeItemsEntity fundsTradeItemsEntity = new FundsTradeItemsEntity();
-        fundsTradeItemsEntity.setPayTradeItemsNo(serialidGenerator.get());
-        fundsTradeItemsEntity.setPayTradeNo(fundsTradeInfoEntity.getPayTradeNo());
-        fundsTradeItemsEntity.setBizTradeNo(refundApplyRequest.getOutBizNo());
-        fundsTradeItemsEntity.setBizAction(BizActionEnum.REFUND.getCode());
-        fundsTradeItemsEntity.setFundsInOut(InOutEnum.OUT.getValue());
-        fundsTradeItemsEntity.setMode(refundApplyRequest.getRefundMode());
-        fundsTradeItemsEntity.setTradeAmount(refundApplyRequest.getRefundAmount());
-        fundsTradeItemsEntity.setMerchantNo(fundsTradeInfoEntity.getMerchantNo());
-        fundsTradeItemsEntity.setTradeState(FundsTradeItemStatus.DOING.getCode());
-        fundsTradeItemsEntity.setTradeNote(RefundMode.getByCode(refundApplyRequest.getRefundMode()).getDesc());
-        fundsTradeItemsEntity.setCreateTime(new Date());
-        fundsTradeItemsEntity.setUpdateTime(new Date());
+        FundsTradeItemsEntity fundsTradeItemsEntity = FundsTradeItemsEntity.builder()
+                .payTradeItemsNo(serialidGenerator.get())
+                .payTradeNo(fundsTradeInfoEntity.getPayTradeNo())
+                .bizTradeNo(refundApplyRequest.getOutBizNo())
+                .bizAction(BizActionEnum.REFUND.getCode())
+                .fundsInOut(InOutEnum.OUT.getValue())
+                .mode(refundApplyRequest.getRefundMode())
+                .tradeAmount(refundApplyRequest.getRefundAmount())
+                .merchantNo(fundsTradeInfoEntity.getMerchantNo())
+                .tradeState(FundsTradeItemStatus.DOING.getCode())
+                .tradeNote(RefundMode.getByCode(refundApplyRequest.getRefundMode()).getDesc())
+                .createTime(new Date())
+                .updateTime(new Date()).build();
         return fundsTradeItemsEntity;
     }
 

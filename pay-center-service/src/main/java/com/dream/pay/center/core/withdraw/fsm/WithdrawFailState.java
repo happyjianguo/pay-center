@@ -3,6 +3,7 @@ package com.dream.pay.center.core.withdraw.fsm;
 import com.dream.center.out.mock.dto.AccountWithdrawOperationResult;
 import com.dream.center.out.mock.dto.OperationStatusEnum;
 import com.dream.pay.center.core.withdraw.enums.WithdrawTaskEnum;
+import com.dream.pay.center.core.withdraw.nsq.WithdrawNsqMessagePoser;
 import com.dream.pay.center.dao.FundsTradeInfoDao;
 import com.dream.pay.center.dao.FundsWithdrawJobDao;
 import com.dream.pay.center.model.FundsWithdrawDetailEntity;

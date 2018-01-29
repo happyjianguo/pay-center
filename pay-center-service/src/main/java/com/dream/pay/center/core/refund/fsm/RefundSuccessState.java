@@ -4,6 +4,7 @@ import com.dream.center.out.mock.dto.AccountRefundOperationResult;
 import com.dream.center.out.mock.dto.OperationStatusEnum;
 import com.dream.pay.bean.Money;
 import com.dream.pay.center.core.refund.enums.RefundTaskEnum;
+import com.dream.pay.center.core.refund.nsq.RefundNsqMessagePoser;
 import com.dream.pay.center.dao.FundsRefundJobDao;
 import com.dream.pay.center.dao.FundsTradeInfoDao;
 import com.dream.pay.center.model.FundsRefundDetailEntity;

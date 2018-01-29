@@ -1,6 +1,5 @@
 package com.dream.pay.center.api.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.dream.center.out.mock.dto.PayOperationResult;
 import com.dream.pay.bean.DataResult;
 import com.dream.pay.center.api.facade.UnifiedPayService;
@@ -16,7 +15,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 /**
- * 统一收单服务实现类。
+ * 统一支付服务实现类。
  *
  * @author mengzhenbin
  */

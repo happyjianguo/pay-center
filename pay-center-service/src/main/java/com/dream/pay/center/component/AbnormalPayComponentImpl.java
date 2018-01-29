@@ -9,7 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 异常支付处理组件实现类
@@ -26,16 +27,15 @@ public class AbnormalPayComponentImpl implements AbnormalPayComponent {
     @Override
     public void save(FundsPayDetailEntity fundsPayDetailEntity, PayTagEnum payTag) {
         try {
-            FundsAbnormalPayEntity abnormalPayDO = new FundsAbnormalPayEntity();
-            abnormalPayDO.setBizTradeNo(fundsPayDetailEntity.getBizTradeNo());
-            abnormalPayDO.setPayTradeNo(fundsPayDetailEntity.getPayTradeNo());
-            abnormalPayDO.setPayTradeItemsNo(fundsPayDetailEntity.getPayTradeItemsNo());
-            abnormalPayDO.setPayDetailNo(fundsPayDetailEntity.getPayDetailNo());
-            abnormalPayDO.setStatus(FundsJobStatus.TODO.getCode());
-            abnormalPayDO.setType(payTag.getCode());
-            Date now = new Date();
-            abnormalPayDO.setCreateTime(now);
-            abnormalPayDO.setUpdateTime(now);
+            FundsAbnormalPayEntity abnormalPayDO = FundsAbnormalPayEntity.builder()
+                    .bizTradeNo(fundsPayDetailEntity.getBizTradeNo())
+                    .payTradeNo(fundsPayDetailEntity.getPayTradeNo())
+                    .payTradeItemsNo(fundsPayDetailEntity.getPayTradeItemsNo())
+                    .payDetailNo(fundsPayDetailEntity.getPayDetailNo())
+                    .status(FundsJobStatus.TODO.getCode())
+                    .type(payTag.getCode())
+                    .createTime(new Date())
+                    .updateTime(new Date()).build();
             fundsAbnormalPayDao.insert(abnormalPayDO);
         } catch (Exception e) {
             log.error("异常支付单[{}],异常类型[{}],存储发生异常，", fundsPayDetailEntity, payTag, e);

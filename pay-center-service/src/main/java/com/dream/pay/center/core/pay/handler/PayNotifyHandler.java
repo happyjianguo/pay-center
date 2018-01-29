@@ -143,29 +143,32 @@ public class PayNotifyHandler extends
      */
     private PayNsqMessage composePayNsqMessage() {
         FundsPayContext fundsPayContext = (FundsPayContext) FundsBaseContextHolder.get();
+
         FundsTradeInfoEntity fundsTradeInfoEntity = fundsPayContext.getFundsTradeInfoEntity();
         FundsTradeItemsEntity fundsTradeItemsEntity = fundsPayContext.getFundsTradeItemsEntity();
         FundsPayDetailEntity payCurrentDetail = fundsPayContext.getCurrentDetail();
-        PayNsqMessage payNsqMessage = new PayNsqMessage();
-        payNsqMessage.setBizProd(String.valueOf(fundsTradeInfoEntity.getBizProd()));
-        payNsqMessage.setBizMode(String.valueOf(fundsTradeInfoEntity.getBizMode()));
-        payNsqMessage.setBizAction(String.valueOf(fundsTradeItemsEntity.getBizAction()));
-        payNsqMessage.setBizSubAction(String.valueOf(payCurrentDetail.getBizSubAction()));
-        payNsqMessage.setPayChannel(payCurrentDetail.getPayTool());
-        payNsqMessage.setOutBizNo(fundsTradeInfoEntity.getBizTradeNo());
-        payNsqMessage.setAcquireNo(fundsTradeInfoEntity.getPayTradeNo());
-        payNsqMessage.setPayDetailNo(payCurrentDetail.getPayDetailNo());
-        payNsqMessage.setMerchantNo(String.valueOf(fundsTradeInfoEntity.getMerchantNo()));
-        payNsqMessage.setPartnerId(fundsTradeInfoEntity.getPartnerId());
-        payNsqMessage.setPayStatus(String.valueOf(payCurrentDetail.getPayStatus()));
-        payNsqMessage.setPayAmount(payCurrentDetail.getPayAmount());
-        payNsqMessage.setCurrency(payCurrentDetail.getCurrency());
-        payNsqMessage.setPayCreateTime(payCurrentDetail.getCreateTime());
-        payNsqMessage.setPayFinishedTime(payCurrentDetail.getOutFinishTime());
-        payNsqMessage.setPayTool(payCurrentDetail.getPayTool());
-        payNsqMessage.setChannelSettleNo(payCurrentDetail.getChannelReturnNo());
-        payNsqMessage.setPayTag(payCurrentDetail.getPayTag());
-        payNsqMessage.setTradeDesc(fundsTradeInfoEntity.getBizTradeName());
+
+        PayNsqMessage payNsqMessage = PayNsqMessage.builder()
+                .bizProd(String.valueOf(fundsTradeInfoEntity.getBizProd()))
+                .bizMode(String.valueOf(fundsTradeInfoEntity.getBizMode()))
+                .bizAction(String.valueOf(fundsTradeItemsEntity.getBizAction()))
+                .bizSubAction(String.valueOf(payCurrentDetail.getBizSubAction()))
+                .payChannel(payCurrentDetail.getPayTool())
+                .outBizNo(fundsTradeInfoEntity.getBizTradeNo())
+                .acquireNo(fundsTradeInfoEntity.getPayTradeNo())
+                .payDetailNo(payCurrentDetail.getPayDetailNo())
+                .merchantNo(String.valueOf(fundsTradeInfoEntity.getMerchantNo()))
+                .partnerId(fundsTradeInfoEntity.getPartnerId())
+                .payStatus(String.valueOf(payCurrentDetail.getPayStatus()))
+                .payAmount(payCurrentDetail.getPayAmount())
+                .currency(payCurrentDetail.getCurrency())
+                .payCreateTime(payCurrentDetail.getCreateTime())
+                .payFinishedTime(payCurrentDetail.getOutFinishTime())
+                .payTool(payCurrentDetail.getPayTool())
+                .channelSettleNo(payCurrentDetail.getChannelReturnNo())
+                .payTag(payCurrentDetail.getPayTag())
+                .tradeDesc(fundsTradeInfoEntity.getBizTradeName()).build();
+
         return payNsqMessage;
     }
 

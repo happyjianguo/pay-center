@@ -5,6 +5,7 @@
 
 package com.dream.pay.center.api.message;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import java.util.Date;
  * @version RefundNsqMessage.java
  */
 @Data
+@Builder
 public class PayNsqMessage extends NsqEntity implements Serializable {
 
     /**

@@ -7,6 +7,7 @@ import java.util.Date;
 @Data
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class FundsPayDetailEntity extends BaseEntity implements Comparable<FundsPayDetailEntity> {

@@ -1,4 +1,4 @@
-package com.dream.pay.center.core.withdraw.fsm;
+package com.dream.pay.center.core.withdraw.nsq;
 
 import com.dream.pay.center.api.message.WithdrawNsqMessage;
 import com.dream.pay.center.component.NsqMessagePoser;
@@ -37,24 +37,24 @@ public class WithdrawNsqMessagePoser extends NsqMessagePoser {
      * @return
      */
     private WithdrawNsqMessage composeWithdrawMessage(FundsWithdrawDetailEntity fundsWithdrawDetailEntity, FundsWithdrawStatus fundsWithdrawStatus) {
-        WithdrawNsqMessage withdrawNsqMessage = new WithdrawNsqMessage();
         UnifiedBizCode unifiedBizCode = BizCodeUtils.parse(fundsWithdrawDetailEntity.getWithdrawNote());
-        withdrawNsqMessage.setBizProd(unifiedBizCode.getBizProdCode());
-        withdrawNsqMessage.setBizMode(unifiedBizCode.getBizModeCode());
-        withdrawNsqMessage.setBizAction(unifiedBizCode.getBizActionCode());
-        withdrawNsqMessage.setBizSubAction(unifiedBizCode.getBizPayToolCode());
-        withdrawNsqMessage.setWithdrawChannel(unifiedBizCode.getBizChannelCode());
-        withdrawNsqMessage.setOutBizNo(fundsWithdrawDetailEntity.getBizTradeNo());
-        withdrawNsqMessage.setAcquireNo(fundsWithdrawDetailEntity.getPayTradeNo());
-        withdrawNsqMessage.setWithdrawNo(fundsWithdrawDetailEntity.getWithdrawDetailNo());
-        withdrawNsqMessage.setMerchantNo(fundsWithdrawDetailEntity.getMerchantNo());
-        withdrawNsqMessage.setPartnerId(fundsWithdrawDetailEntity.getPartnerId());
-        withdrawNsqMessage.setWithdrawStatus(fundsWithdrawStatus.name());
-        withdrawNsqMessage.setWithdrawAmount(fundsWithdrawDetailEntity.getWithdrawAmount());
-        withdrawNsqMessage.setCurrency(fundsWithdrawDetailEntity.getCurrency());
-        withdrawNsqMessage.setWithdrawCreateTime(fundsWithdrawDetailEntity.getCreateTime());
-        withdrawNsqMessage.setWithdrawFinishTime(fundsWithdrawDetailEntity.getOutFinishTime());
-        withdrawNsqMessage.setTradeDesc("提现");
+        WithdrawNsqMessage withdrawNsqMessage = WithdrawNsqMessage.builder()
+                .bizProd(unifiedBizCode.getBizProdCode())
+                .bizMode(unifiedBizCode.getBizModeCode())
+                .bizAction(unifiedBizCode.getBizActionCode())
+                .bizSubAction(unifiedBizCode.getBizPayToolCode())
+                .withdrawChannel(unifiedBizCode.getBizChannelCode())
+                .outBizNo(fundsWithdrawDetailEntity.getBizTradeNo())
+                .acquireNo(fundsWithdrawDetailEntity.getPayTradeNo())
+                .withdrawNo(fundsWithdrawDetailEntity.getWithdrawDetailNo())
+                .merchantNo(fundsWithdrawDetailEntity.getMerchantNo())
+                .partnerId(fundsWithdrawDetailEntity.getPartnerId())
+                .withdrawStatus(fundsWithdrawStatus.name())
+                .withdrawAmount(fundsWithdrawDetailEntity.getWithdrawAmount())
+                .currency(fundsWithdrawDetailEntity.getCurrency())
+                .withdrawCreateTime(fundsWithdrawDetailEntity.getCreateTime())
+                .withdrawFinishTime(fundsWithdrawDetailEntity.getOutFinishTime())
+                .tradeDesc("提现").build();
         return withdrawNsqMessage;
     }
 }

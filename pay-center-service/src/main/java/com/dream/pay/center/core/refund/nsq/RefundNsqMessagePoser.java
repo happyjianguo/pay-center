@@ -1,4 +1,4 @@
-package com.dream.pay.center.core.refund.fsm;
+package com.dream.pay.center.core.refund.nsq;
 
 import com.dream.pay.center.api.message.RefundNsqMessage;
 import com.dream.pay.center.component.NsqMessagePoser;
@@ -37,22 +37,22 @@ public class RefundNsqMessagePoser extends NsqMessagePoser {
      * @return
      */
     private RefundNsqMessage composeRefundNsqMessage(FundsRefundDetailEntity fundsRefundDetailEntity, FundsRefundStatus fundsRefundStatus) {
-        RefundNsqMessage refundNsqMessage = new RefundNsqMessage();
         UnifiedBizCode unifiedBizCode = BizCodeUtils.parse(fundsRefundDetailEntity.getRefundNote());
-        refundNsqMessage.setBizProd(unifiedBizCode.getBizProdCode());
-        refundNsqMessage.setBizMode(unifiedBizCode.getBizModeCode());
-        refundNsqMessage.setBizAction(unifiedBizCode.getBizActionCode());
-        refundNsqMessage.setBizSubAction(unifiedBizCode.getBizPayToolCode());
-        refundNsqMessage.setRefundChannel(unifiedBizCode.getBizChannelCode());
-        refundNsqMessage.setOutBizNo(fundsRefundDetailEntity.getBizTradeNo());
-        refundNsqMessage.setAcquireNo(fundsRefundDetailEntity.getPayTradeNo());
-        refundNsqMessage.setRefundDetailNo(fundsRefundDetailEntity.getRefundDetailNo());
-        refundNsqMessage.setRefundStatus(fundsRefundStatus.name());
-        refundNsqMessage.setRefundAmount(fundsRefundDetailEntity.getRefundAmount());
-        refundNsqMessage.setCurrency(fundsRefundDetailEntity.getCurrency());
-        refundNsqMessage.setRefundCreateTime(fundsRefundDetailEntity.getCreateTime());
-        refundNsqMessage.setRefundFinishTime(fundsRefundDetailEntity.getOutFinishTime());
-        refundNsqMessage.setTradeDesc("提现");
+        RefundNsqMessage refundNsqMessage = RefundNsqMessage.builder()
+                .bizProd(unifiedBizCode.getBizProdCode())
+                .bizMode(unifiedBizCode.getBizModeCode())
+                .bizAction(unifiedBizCode.getBizActionCode())
+                .bizSubAction(unifiedBizCode.getBizPayToolCode())
+                .refundChannel(unifiedBizCode.getBizChannelCode())
+                .outBizNo(fundsRefundDetailEntity.getBizTradeNo())
+                .acquireNo(fundsRefundDetailEntity.getPayTradeNo())
+                .refundDetailNo(fundsRefundDetailEntity.getRefundDetailNo())
+                .refundStatus(fundsRefundStatus.name())
+                .refundAmount(fundsRefundDetailEntity.getRefundAmount())
+                .currency(fundsRefundDetailEntity.getCurrency())
+                .refundCreateTime(fundsRefundDetailEntity.getCreateTime())
+                .refundFinishTime(fundsRefundDetailEntity.getOutFinishTime())
+                .tradeDesc("退款").build();
         return refundNsqMessage;
     }
 }
