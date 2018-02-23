@@ -24,8 +24,8 @@ public enum PayMode {
     BANK_PAY_20(20, "银行+活动支付", PayToolType.BANK_PAY),
     BANK_PAY_28(28, "银行+内部工具+活动支付", PayToolType.BANK_PAY),
 
-    INNER_PAY_8(8, "内部工具支付", PayToolType.INNER_PAY),
-    INNER_PAY_24(24, "内部工具+活动支付", PayToolType.INNER_PAY);
+    INNER_PAY_8(8, "内部工具支付", PayToolType.VIRTUAL_PAY),
+    INNER_PAY_24(24, "内部工具+活动支付", PayToolType.VIRTUAL_PAY);
 
 
     private final int key;

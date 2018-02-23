@@ -130,7 +130,7 @@ public class RechargeApplyHandler extends
                 .tradeState(FundsTradeStatus.CREATE.getCode())
                 .settledState(FundsTradeSettleStatus.CREATE.getCode())
                 .notifyState(FundsTradeNotifyStatus.NONE.getCode())
-                .expiredTime(DateUtil.StringToDateTime(request.getExpiredTime()))
+                .expiredTime(DateUtil.StringToDefaultDate(request.getExpiredTime()))
                 .extraInfo(request.getExtendInfo())
                 .outBizContext(request.getTraceContext().getTraceId())
                 .createTime(new Date())

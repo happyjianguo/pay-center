@@ -122,7 +122,7 @@ public class PayCoreServiceImpl implements PayCoreService {
                 case BANK_PAY:
                     serviceName = "gatePaySubmitPayHandler";
                     break;
-                case INNER_PAY:
+                case VIRTUAL_PAY:
                     serviceName = "innerPaySubmitPayHandler";
                 case ACTIVE_PAY:
                     break;
@@ -163,7 +163,7 @@ public class PayCoreServiceImpl implements PayCoreService {
                     case BANK_PAY:
                         serviceName = "bankPayConfirmHandler";// 快捷，平台，网银支付子单处理类
                         break;
-                    case INNER_PAY:
+                    case VIRTUAL_PAY:
                         serviceName = "innerPayConfirmHandler";// 余额支付子单处理类
                         break;
                     case ACTIVE_PAY:
